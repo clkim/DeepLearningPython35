@@ -15,19 +15,19 @@ Acknowledgement: The repo is forked from _DeepLearningPython35_ repo of Michal D
 ~ $ cd DeepLearningPython35
 ~/DeepLearningPython35 $ git checkout chap1_30-hidden-neurons-3.0-eta
 ```
-In order to run the desired setup of demo code, comment in/out or add/modify the code as appropriate in `test.py` in order to specify the neural network and deep learning configuration to run.
+To run the desired setup of demo code, "comment in/out" as appropriate the code in `test.py` in order to specify the neural network and deep learning configuration to run.
 
 To see an example of the (flexible but somewhat hackish and minimalist) changes I made in `test.py` in order to run the demo in the chap1 branch,
-at command line run `git diff ea229ac 6ba2425` to see the small change committed in the branch.
+at command line run `git diff 11cd4c1 6ba2425` to see the small change committed in the branch.
 
 
 Run _Docker Desktop_ app locally (currently 3.0.3 for Mac).
 
 At repo directory, start docker container _deeplearning_ (see below for how to create container).
-In container shell `cd` into mounted repo directory (which should be already on desired git branch, e.g. chap1_30-hidden-neurons-3.0-eta).
+In container shell `cd` into the mounted directory (points to DeepLearningPython35, which should be already on the desired git branch, e.g. chap1_30-hidden-neurons-3.0-eta).
 ```
 ~/DeepLearningPython35 $ docker container ls --all
-< Should see a table with column names CONTAINER ID ... NAMES, and a row with container named deeplearning >
+< Should see a table with column names CONTAINER ID ... NAMES, and container named deeplearning >
 
 ~/DeepLearningPython35 $ docker container start -ai deeplearning
 (base) root@xxx:/# cd deeplearn/
@@ -46,6 +46,8 @@ Epoch 4 : 9337 / 10000
 Epoch 5 : 9374 / 10000
 Epoch 6 : 9386 / 10000
 < On my late 2013 MacBook Pro, it takes about a minute to finish Epoch 6; control-C to break >
+< Each epoch run uses all training images, then evaluates the neural network with test images >
+
 (nndlbook) root@xxx:/deeplearn# exit
 exit
 ~/DeepLearningPython35 $
