@@ -39,6 +39,7 @@ In container shell `cd` into the mounted directory (points to local _DeepLearnin
 Python 3.8.5
 (base) root@xxx:/deeplearn# conda info --env
 < Should see two environments: base and nndlbook >
+
 (base) root@xxx:/deeplearn# conda activate nndlbook
 
 (nndlbook) root@xxx:/deeplearn# python3.8 test.py
@@ -90,10 +91,12 @@ Proceed ([y]/n)? y
 ...
 
 (base) root@xxx:/# conda activate nndlbook
+
 (nndlbook) root@xxx:/# conda list
 # packages in environment at /opt/conda/envs/nndlbook:
 #
 # Name                    Version                   Build  Channel
+
 (nndlbook) root@xxx:/# python --version
 Python 3.8.5
 
