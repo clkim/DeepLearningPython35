@@ -1,6 +1,11 @@
 ## Running IEEE Boston Section class demo code
 ## Introduction to Practical Neural Networks and Deep Learning (Part 1)<br>June 19, 2021
-
+Instructions are given below for each of the five steps:
+* download Git software
+* download Docker software
+* clone GitHub respository containing the demo code into local directory
+* create a Docker container locally to run the demo Python code
+* run the demo Python code in the created Docker container
 
 ##### Why use Docker container
 In order to avoid potential problems with installing Python and the needed packages to run the book's demo code on different platforms such as Mac, Windows, or Linux,
@@ -10,7 +15,7 @@ Docker is sufficiently popular nowadays so that installing as well as running Do
 ### How to download Git software
 Git is a very popular source code management tool for version control, widely used among software professionals.
 
-Estimate time: 15 mins.  
+Estimated time: 15 mins.  
 Go to [Install Git](https://www.atlassian.com/git/tutorials/install-git), and scroll to Install Git on \[Mac OS X | Windows | Linux\] section as appropriate.  
 Unless you have a preference, probably just pick the first method for your platform.
  
@@ -18,21 +23,21 @@ Unless you have a preference, probably just pick the first method for your platf
 Git for Mac Installer > pick latest link (currently `git-2.31.0-intel-universal-mavericks.dmg`);  
 if you're installing from a downloaded .dmg file, you may be blocked from opening the installation package; if you see
 "macOS cannot verify that this app is free from malware", go to _System Preferences_ > _Security & Privacy_ > click `Open Anyway` for that downloaded git-xxx.pkg file.  
-Install just Git; you should not need to install git-credential-osxkeychain helper.  
+Install just Git; you should not need to install git-credential-osxkeychain helper.)
 
 ### How to download Docker software
 In software engineering parlance, a _container_ packages up code and all its dependencies into a standard unit of software so that the application can run
 quickly and reliably from one computing environment to another.
 Docker is a very popular container technology. The containers run on _Docker Engine_.
 
-Estimate time: 15 mins.  
+Estimated time: 15 mins.  
 Go to [Get Docker](https://docs.docker.com/get-docker/), and pick Docker \[Desktop for Mac | Desktop for Windows | for Linux\] to do the appropriate install.  
 For Mac and Windows, after installing Docker Desktop, find the application icon to run the _Docker_ app (_Docker Desktop_), so as to start _Docker Engine_;
 it could take about half a minute to start; then you could minimize or close the Docker _Dashboard_ window but verify that _Docker Desktop_ is still running.  
 For Linux, install _Docker Engine_ then start _Docker_.
 
 ### How to clone GitHub repository into local directory
-Estimate time: 10 mins.  
+Estimated time: 10 mins.  
 The commands shown in the text area below do the following; the text area also shows the _Terminal_ console response to the commands:  
 - Clone with `git clone https://github.com/...` the specified _GitHub_ repository at a Terminal command line;
 this downloads the demo source code from that specified repository into your local computer
@@ -69,8 +74,9 @@ the neural network and deep learning configuration to run.
 (Skip until class) To see an example of the (flexible but somewhat hackish and minimalist) changes I made in _test.py_ in order to run the demo
 in the chap1 branch, at command line run  
 `git diff ea229ac 6ba2425`  
-to see the small changes committed in the branch (red text is deleted, green text is added; hit space bar once to scroll down one page;
-when we see the (END) of document, enter q to quit and get back to the command line).
+to see the small changes committed in the branch  
+(red text is deleted, green text is added; hit space bar once to scroll down one page;
+when we see `(END)` of document, enter q to quit and get back to the command line).
 
 Acknowledgement: The repository is forked from the _DeepLearningPython35_ repository of _Michal Daniel Dobrzanski_ who ported the book's code from
 Python 2.7 to Python 3.5 and wrote the "orchestrator" testing file _test.py_.
@@ -86,21 +92,21 @@ as described above in "How to clone GitHub repository into local directory".
 
 `cd` into the directory _DeepLearningPython35_ if not already there.
 
-Estimate time: 15 - 30 mins.  
+Estimated time: 20 - 30 mins.  
 The commands shown in the text area below do the following; the text area also shows the _Terminal_ console response to the commands:
 - First run `docker pull continuumio/miniconda3` to download the _miniconda3_ image, which contains _conda_, a small version of Anaconda
 which is a very popular data science platform
 - Then run `docker images` to verify the image _continuumio/miniconda3_ is downloaded  
 - Then run the given `docker` command to create a new container layer over the downloaded image
   - At the interactive shell command line inside the container, we check the conda version, with `conda --version`
-  - Then create our own environment, named _nndlbook_ for our own use, with `conda create --nndlbook`
-  - Then we active this new _nndlbook_ conda environment, with `conda activate nndlbook`
-  - Next, do a perfunctory check that no additional packages are installed yet, with `conda list`
-  - Do a check that we do have python installed already, with `python --version`
+  - Then create our own environment, named _nndlbook_ for our use, with `conda create --nndlbook`
+  - Then we activate this new _nndlbook_ conda environment, with `conda activate nndlbook`
+  - Next, do a confirming check that no additional packages are installed yet, with `conda list`
+  - And do a check that we do have python installed already, with `python --version`
   - Now, we are ready to install our packages, with `conda install numpy` and then `conda install theano`
-  - Finally, we do a check that we see those two package names, among others, with `conda list`
+  - Finally, we do a sanity check that we see those two package names, among others, with `conda list`
   - Then we exit our newly created local container, with `exit`
-- Back at the Terminal command line, verify that we have created a local container named _deeplearning_, with `docker container ls --all`
+- Back at the Terminal console, verify that we have created a local container named _deeplearning_, with `docker container ls --all`
 ```
 ~/DeepLearningPython35 $
 ~/DeepLearningPython35 $ docker pull continuumio/miniconda3
@@ -164,7 +170,7 @@ xxxxxxxxxxxx   continuumio/miniconda3   "/bin/bash"   xxx                    dee
 ```
 
 ### How to run the demo Python code in the created Docker container
-Estimate time: 10 mins.  
+Estimated time: 10 mins.  
 Ensure that you have already started Docker Engine, e.g. by running _Docker_ app (_Docker Desktop_) locally;  
 and that you have already cloned the demo Python source code from GitHub, into the _DeepLearningPython35_ directory, as described above
 in "How to clone GitHub repository into local directory".
@@ -187,7 +193,7 @@ The commands shown in the text area below do the following; the text area also s
   - Then we activate our own previously created conda environment _nndlbook_, with `conda activate nndlbook`
   - Finally, we now run the demo code in _test.py_, with `python3.8 test.py`; use control-c to break out of the run if desired
   - After the run, we exit the container, with `exit`
-- Now we should be back at the Terminal command line, in the _DeepLearningPython35_ directory
+- Now we should be back at the Terminal console, in the _DeepLearningPython35_ directory
 ```
 ~/DeepLearningPython35 $
 ~/DeepLearningPython35 $ docker container ls --all
