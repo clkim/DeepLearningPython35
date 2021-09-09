@@ -1,5 +1,5 @@
 ## Running IEEE Boston Section class demo code
-## Introduction to Practical Neural Networks and Deep Learning (Part 1)<br>June 19, 2021
+## Introduction to Practical Neural Networks and Deep Learning (Part 1)<br>September 18, 2021
 Instructions are given below for each of the five steps:
 * download Git software
 * download Docker software
