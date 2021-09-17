@@ -20,7 +20,7 @@ Go to [Install Git](https://www.atlassian.com/git/tutorials/install-git), and sc
 Unless you have a preference, probably just pick the first method for your platform.
  
 (For Mac:  
-Git for Mac Installer > pick latest link (currently `git-2.31.0-intel-universal-mavericks.dmg`);  
+Git for Mac Installer > pick latest link (currently `git-2.33.0-intel-universal-mavericks.dmg`);  
 if you're installing from a downloaded .dmg file, you may be blocked from opening the installation package; if you see
 "macOS cannot verify that this app is free from malware", go to _System Preferences_ > _Security & Privacy_ > click `Open Anyway` for that downloaded git-xxx.pkg file.  
 Install just Git; you should not need to install git-credential-osxkeychain helper.)
@@ -28,12 +28,12 @@ Install just Git; you should not need to install git-credential-osxkeychain help
 ### How to download Docker software
 In software engineering parlance, a _container_ packages up code and all its dependencies into a standard unit of software so that the application can run
 quickly and reliably from one computing environment to another.
-Docker is a very popular container technology. The containers run on _Docker Engine_.
+Docker is a very popular container technology. Personal use will remain free. The containers run on _Docker Engine_.
 
 Estimated time: 15 mins.  
 Go to [Get Docker](https://docs.docker.com/get-docker/), and pick Docker \[Desktop for Mac | Desktop for Windows | for Linux\] to do the appropriate install.  
 For Mac and Windows, after installing Docker Desktop, find the application icon to run the _Docker_ app (_Docker Desktop_), so as to start _Docker Engine_;
-it could take about half a minute to start; then you could minimize or close the Docker _Dashboard_ window but verify that _Docker Desktop_ is still running.  
+it could take about half a minute to start; then you could minimize or close the Docker _Dashboard_ window (double check that _Docker Desktop_ is still running).  
 For Linux, install _Docker Engine_ then start _Docker_.
 
 ### How to clone GitHub repository into local directory
