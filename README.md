@@ -184,7 +184,7 @@ The commands shown in the text area below do the following; the text area also s
   - We check the python version, with `python --version`
   - And verify what conda environments we have, with `conda info --env` 
   - Then we activate our own previously created conda environment _nndlbook_, with `conda activate nndlbook`
-  - Finally, we now run the demo code in _test.py_, with `python3.8 test.py`; use control-c to break out of the run if desired
+  - Finally, we now run the demo code in _test.py_, with `python3.9 test.py`; use control-c to break out of the run if desired
   - After the run, we exit the container, with `exit`
 - Now we should be back at the Terminal console, in the _DeepLearningPython35_ directory
 ```
