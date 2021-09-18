@@ -82,14 +82,15 @@ Acknowledgement: The repository is forked from the _DeepLearningPython35_ reposi
 Python 2.7 to Python 3.5 and wrote the "orchestrator" testing file _test.py_.
 
 ### How to create a Docker container locally to run the demo Python code
-Background: We want to set up a "bind" type of mount in the container whose source is the directory in our local computer where the demo Python
+Background: We want to set up a `bind mount` in the container whose source is the directory in our local computer where the demo Python
 source code has been cloned from GitHub, in order that the source code on our local computer would be accessible from inside the container.  
-We also want to install two Python packages, _Numpy_ package and _Theano_ package, in the container we want to create.
+We also want to install the Python packages _Numpy_ package in the container we want to create.
 
 Ensure that you have already started Docker Engine, e.g. by running _Docker_ app (_Docker Desktop_) locally;  
 and that you have already cloned the demo Python source code from GitHub, into the _DeepLearningPython35_ directory,
 as described above in "How to clone GitHub repository into local directory".
 
+You must be at the _DeepLearningPython35_ directory, because the `bind mount` being set up into the container references `pwd`, the current directory.  
 `cd` into the directory _DeepLearningPython35_ if not already there.
 
 Estimated time: 20 - 30 mins.  
@@ -101,10 +102,10 @@ which is a very popular data science platform
   - At the interactive shell command line inside the container, we check the conda version, with `conda --version`
   - Then create our own environment, named _nndlbook_ for our use, with `conda create --nndlbook`
   - Then we activate this new _nndlbook_ conda environment, with `conda activate nndlbook`
-  - Next, do a confirming check that no additional packages are installed yet, with `conda list`
+  - Next, do a confirming check that no packages are installed yet, with `conda list`
   - And do a check that we do have python installed already, with `python --version`
-  - Now, we are ready to install our packages, with `conda install numpy` and then `conda install theano`
-  - Finally, we do a sanity check that we see those two package names, among others, with `conda list`
+  - Now, we are ready to install our package, with `conda install numpy`
+  - Finally, we do a sanity check that we see the package names, among others, with `conda list`
   - Then we exit our newly created local container, with `exit`
 - Back at the Terminal console, verify that we have created a local container named _deeplearning_, with `docker container ls --all`
 ```
@@ -121,14 +122,14 @@ continuumio/miniconda3   latest    xxxxxxxxxxxx   n months ago    nnnMB
 ~/DeepLearningPython35 $ docker run -it --name deeplearning --mount type=bind,source="$(pwd)",target=/deeplearn continuumio/miniconda3
 
 (base) root@xxx:/# conda --version
-conda 4.9.2
+conda 4.10.3
 
 (base) root@xxx:/# conda create --name nndlbook
 Collecting package metadata (current_repodata.json): done
 ...
 Proceed ([y]/n)? y
 ...
-# To activate this environment, use
+Executing transaction: done
 ...
 
 (base) root@xxx:/# conda activate nndlbook
@@ -139,7 +140,7 @@ Proceed ([y]/n)? y
 # Name                    Version                   Build  Channel
 
 (nndlbook) root@xxx:/# python --version
-Python 3.8.5
+Python 3.9.5
 
 (nndlbook) root@x:/# conda install numpy
 Collecting package metadata (current_repodata.json): done
@@ -149,16 +150,8 @@ Proceed ([y]/n)? y
 ...
 Executing transaction: done
 
-(nndlbook) root@xxx:/# conda install theano
-Collecting package metadata (current_repodata.json): done
-...
-Proceed ([y]/n)? y
-...
-...
-Executing transaction: done
-
 (nndlbook) root@xxx:/# conda list
-< Should see list of packages including numpy and theano >
+< Should see list of packages including numpy and numpy-base >
 
 (nndlbook) root@xxx:/# exit
 exit
@@ -206,14 +199,14 @@ xxxxxxxxxxxx   continuumio/miniconda3   "/bin/bash"   xxx                    dee
 (base) root@xxx:/# cd deeplearn/
 
 (base) root@xxx:/deeplearn# python --version
-Python 3.8.5
+Python 3.9.5
 
 (base) root@xxx:/deeplearn# conda info --env
 < Should see two environments: base and nndlbook >
 
 (base) root@xxx:/deeplearn# conda activate nndlbook
 
-(nndlbook) root@xxx:/deeplearn# python3.8 test.py
+(nndlbook) root@xxx:/deeplearn# python3.9 test.py
 Epoch 0 : 8943 / 10000
 Epoch 1 : 9166 / 10000
 Epoch 2 : 9267 / 10000
@@ -221,7 +214,7 @@ Epoch 3 : 9340 / 10000
 Epoch 4 : 9337 / 10000
 Epoch 5 : 9374 / 10000
 Epoch 6 : 9386 / 10000
-< On my late-2013 MacBook Pro, it takes about a minute to finish Epoch 6; use control-c to break if desired >
+< On my late-2013 MacBook Pro, it takes about a minute to do Eposh 1 to Epoch 6; use control-c to break if desired >
 < Each epoch run uses the training images; then neural network is evaluated on test images >
 
 (nndlbook) root@xxx:/deeplearn# exit
