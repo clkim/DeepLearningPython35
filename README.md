@@ -130,15 +130,21 @@ conda 4.10.3
 (base) root@xxx:/# conda create --name nndlbook
 Collecting package metadata (current_repodata.json): done
 ...
-(if see ==> WARNING: A newer version of conda exists. <== )
-(exit the create by entering n at prompt to Proceed )
-(then update conda by running the suggested at command prompt #: conda update -n base -c defaults conda )
-(answer y to proceed )
-(now re-run at command prompt #: conda create --name nndlbook )
+< if see ==> WARNING: A newer version of conda exists. <== >
+          current version: 4.10.3
+          latest version: 4.11.0
+< exit the 'conda create' command by entering n at prompt to Proceed >
+< then update conda by running the suggested command at prompt #: >
+< conda update -n base -c defaults conda >
+< answer y to proceed >
+< then re-run at command prompt #: conda create --name nndlbook >
 Proceed ([y]/n)? y
 ...
 Executing transaction: done
 ...
+
+(base) root@xxx:/# conda --version
+conda 4.11.0
 
 (base) root@xxx:/# conda activate nndlbook
 
@@ -163,7 +169,7 @@ Executing transaction: done
 
 (nndlbook) root@xxx:/# python --version
 Python 3.9.7
-(note that we have a later Python version after installing Numpy )
+< note that we have a later Python version after installing Numpy >
 
 (nndlbook) root@xxx:/# exit
 exit
@@ -226,7 +232,7 @@ Epoch 3 : 9340 / 10000
 Epoch 4 : 9337 / 10000
 Epoch 5 : 9374 / 10000
 Epoch 6 : 9386 / 10000
-< On my late-2013 MacBook Pro, it takes about a minute to do Eposh 1 to Epoch 6; use control-c to break if desired >
+< On my late-2013 MacBook Pro, it takes about a minute to do Epoch 1 to Epoch 6; use control-c to break if desired >
 < Each epoch run uses the training images; then neural network is evaluated on test images >
 
 (nndlbook) root@xxx:/deeplearn# exit
