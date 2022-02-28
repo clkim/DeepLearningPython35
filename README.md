@@ -1,5 +1,5 @@
 ## Running IEEE Boston Section class demo code
-## Introduction to Practical Neural Networks and Deep Learning (Part 1)<br>September 18, 2021
+## Introduction to Practical Neural Networks and Deep Learning (Part 1)<br>March 19, 2022
 Instructions are given below for each of the five steps:
 * download Git software
 * download Docker software
@@ -10,7 +10,8 @@ Instructions are given below for each of the five steps:
 ##### Why use Docker container
 In order to avoid potential problems with installing Python and the needed packages to run the book's demo code on different platforms such as Mac, Windows, or Linux,
 we decided to create a _Docker_ container and to run the demo code in it.
-Docker is sufficiently popular nowadays so that installing as well as running Docker on different platforms should be well supported and documented. 
+Docker is sufficiently popular nowadays so that installing as well as running Docker on different platforms should be well supported and documented.
+Personal and small business use is still free, though a sign-up for a Docker account may be required.
 
 ### How to download Git software
 Git is a very popular source code management tool for version control, widely used among software professionals.
@@ -28,7 +29,7 @@ Install just Git; you should not need to install git-credential-osxkeychain help
 ### How to download Docker software
 In software engineering parlance, a _container_ packages up code and all its dependencies into a standard unit of software so that the application can run
 quickly and reliably from one computing environment to another.
-Docker is a very popular container technology. Personal use will remain free. The containers run on _Docker Engine_.
+Docker is a very popular container technology. The containers run on _Docker Engine_.
 
 Estimated time: 15 mins.  
 Go to [Get Docker](https://docs.docker.com/get-docker/), and pick Docker \[Desktop for Mac | Desktop for Windows | for Linux\] to do the appropriate install.  
@@ -95,18 +96,20 @@ You must be at the _DeepLearningPython35_ directory, because the `bind mount` be
 
 Estimated time: 20 - 30 mins.  
 The commands shown in the text area below do the following; the text area also shows the _Terminal_ console response to the commands:
-- First run `docker pull continuumio/miniconda3` to download the _miniconda3_ image, which contains _conda_, a small version of Anaconda
+- First run `docker pull continuumio/miniconda3` to download the _miniconda3_ image which contains _conda_, a small version of Anaconda
 which is a very popular data science platform
 - Then run `docker images` to verify the image _continuumio/miniconda3_ is downloaded  
 - Then run the given `docker` command to create a new container layer over the downloaded image
   - At the interactive shell command line inside the container, we check the conda version, with `conda --version`
   - Then create our own environment, named _nndlbook_ for our use, with `conda create --nndlbook`
+  - (May be prompted to update to a new version of conda)
   - Then we activate this new _nndlbook_ conda environment, with `conda activate nndlbook`
   - Next, do a confirming check that no packages are installed yet, with `conda list`
   - And do a check that we do have python installed already, with `python --version`
   - Now, we are ready to install our package, with `conda install numpy`
-  - Finally, we do a sanity check that we see the package names, among others, with `conda list`
-  - Then we exit our newly created local container, with `exit`
+  - We do a sanity check that we see the `numpy` package name, among others, with `conda list`
+  - Finally, we check the python version which may be different after installing `numpy`
+  - We exit our newly created local container, with `exit`
 - Back at the Terminal console, verify that we have created a local container named _deeplearning_, with `docker container ls --all`
 ```
 ~/DeepLearningPython35 $
@@ -127,6 +130,11 @@ conda 4.10.3
 (base) root@xxx:/# conda create --name nndlbook
 Collecting package metadata (current_repodata.json): done
 ...
+(if see ==> WARNING: A newer version of conda exists. <== )
+(exit the create by entering n at prompt to Proceed )
+(then update conda by running the suggested at command prompt #: conda update -n base -c defaults conda )
+(answer y to proceed )
+(now re-run at command prompt #: conda create --name nndlbook )
 Proceed ([y]/n)? y
 ...
 Executing transaction: done
@@ -152,6 +160,10 @@ Executing transaction: done
 
 (nndlbook) root@xxx:/# conda list
 < Should see list of packages including numpy and numpy-base >
+
+(nndlbook) root@xxx:/# python --version
+Python 3.9.7
+(note that we have a later Python version after installing Numpy )
 
 (nndlbook) root@xxx:/# exit
 exit
@@ -181,9 +193,9 @@ The commands shown in the text area below do the following; the text area also s
   - At the interactive shell command line inside the container, we `cd` into the _deeplearn_ directory mounted into the container;
   when we created the container, we had bind that mount to the local _DeepLearningPython35_ directory,
   which must be already on the git branch _chap1_30-hidden-neurons-3.0-eta_
-  - We check the python version, with `python --version`
   - And verify what conda environments we have, with `conda info --env` 
   - Then we activate our own previously created conda environment _nndlbook_, with `conda activate nndlbook`
+  - We check the python version, with `python --version`
   - Finally, we now run the demo code in _test.py_, with `python3.9 test.py`; use control-c to break out of the run if desired
   - After the run, we exit the container, with `exit`
 - Now we should be back at the Terminal console, in the _DeepLearningPython35_ directory
@@ -198,13 +210,13 @@ xxxxxxxxxxxx   continuumio/miniconda3   "/bin/bash"   xxx                    dee
 
 (base) root@xxx:/# cd deeplearn/
 
-(base) root@xxx:/deeplearn# python --version
-Python 3.9.5
-
 (base) root@xxx:/deeplearn# conda info --env
 < Should see two environments: base and nndlbook >
 
 (base) root@xxx:/deeplearn# conda activate nndlbook
+
+(nndlbook) root@xxx:/deeplearn# python --version
+Python 3.9.7
 
 (nndlbook) root@xxx:/deeplearn# python3.9 test.py
 Epoch 0 : 8943 / 10000
