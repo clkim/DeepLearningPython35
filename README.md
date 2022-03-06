@@ -9,7 +9,9 @@ Instructions are given below for each of the five steps:
 
 ##### Why use Docker container
 In order to avoid potential problems with installing Python and the needed packages to run the book's demo code on different platforms such as Mac, Windows, or Linux,
-we decided to create a _Docker_ container and to run the demo code in it.
+we decided to create a _Docker_ container and to run the demo code in it.  
+In software engineering parlance, a _container_ packages up code and all its dependencies into a standard unit of software so that the application can run
+anywhere, as long as the container engine supports the underlying operating system.  
 Docker is sufficiently popular nowadays so that installing as well as running Docker on different platforms should be well supported and documented.
 Personal and small business use is still free, though a sign-up for a Docker account may be required.
 
@@ -27,8 +29,6 @@ if you're installing from a downloaded .dmg file, you may be blocked from openin
 Install just Git; you should not need to install git-credential-osxkeychain helper.)
 
 ### How to download Docker software
-In software engineering parlance, a _container_ packages up code and all its dependencies into a standard unit of software so that the application can run
-quickly and reliably from one computing environment to another.
 Docker is a very popular container technology. The containers run on _Docker Engine_.
 
 Estimated time: 15 mins.  
@@ -85,7 +85,7 @@ Python 2.7 to Python 3.5 and wrote the "orchestrator" testing file _test.py_.
 ### How to create a Docker container locally to run the demo Python code
 Background: We want to set up a `bind mount` in the container whose source is the directory in our local computer where the demo Python
 source code has been cloned from GitHub, in order that the source code on our local computer would be accessible from inside the container.  
-We also want to install the Python packages _Numpy_ package in the container we want to create.
+We also want to install the Python package _Numpy_ in the container we want to create.
 
 Ensure that you have already started Docker Engine, e.g. by running _Docker_ app (_Docker Desktop_) locally;  
 and that you have already cloned the demo Python source code from GitHub, into the _DeepLearningPython35_ directory,
@@ -96,8 +96,8 @@ You must be at the _DeepLearningPython35_ directory, because the `bind mount` be
 
 Estimated time: 20 - 30 mins.  
 The commands shown in the text area below do the following; the text area also shows the _Terminal_ console response to the commands:
-- First run `docker pull continuumio/miniconda3` to download the _miniconda3_ image which contains _conda_, a small version of Anaconda
-which is a very popular data science platform
+- First run `docker pull continuumio/miniconda3` to download the _miniconda3_ image which contains Python and _conda_, a package manager as well as
+an environment manager tool; miniconda can be considered a mini version of Anaconda which is a very popular data science platform
 - Then run `docker images` to verify the image _continuumio/miniconda3_ is downloaded  
 - Then run the given `docker` command to create a new container layer over the downloaded image
   - At the interactive shell command line inside the container, we check the conda version, with `conda --version`
@@ -105,10 +105,10 @@ which is a very popular data science platform
   - (May be prompted to update to a new version of conda)
   - Then we activate this new _nndlbook_ conda environment, with `conda activate nndlbook`
   - Next, do a confirming check that no packages are installed yet, with `conda list`
-  - And do a check that we do have python installed already, with `python --version`
+  - And do a sanity check that we do have python installed, with `python --version`
   - Now, we are ready to install our package, with `conda install numpy`
   - We do a sanity check that we see the `numpy` package name, among others, with `conda list`
-  - Finally, we check the python version which may be different after installing `numpy`
+  - Finally, we check the python version which may be different in our _nndlbook_ environment after installing `numpy`
   - We exit our newly created local container, with `exit`
 - Back at the Terminal console, verify that we have created a local container named _deeplearning_, with `docker container ls --all`
 ```
@@ -130,14 +130,14 @@ conda 4.10.3
 (base) root@xxx:/# conda create --name nndlbook
 Collecting package metadata (current_repodata.json): done
 ...
-< if see ==> WARNING: A newer version of conda exists. <== >
-          current version: 4.10.3
-          latest version: 4.11.0
+< if see ==> WARNING: A newer version of conda exists. <==           >
+<         current version: 4.10.3                                    >
+<         latest version: 4.11.0                                     >
 < exit the 'conda create' command by entering n at prompt to Proceed >
-< then update conda by running the suggested command at prompt #: >
-< conda update -n base -c defaults conda >
-< answer y to proceed >
-< then re-run at command prompt #: conda create --name nndlbook >
+< then update conda by running the suggested command at prompt #:    >
+< conda update -n base -c defaults conda                             >
+< answer y to proceed                                                >
+< then re-run at command prompt #: conda create --name nndlbook      >
 Proceed ([y]/n)? y
 ...
 Executing transaction: done
