@@ -1,5 +1,5 @@
 ## Running IEEE Boston Section class demo code
-## Introduction to Practical Neural Networks and Deep Learning (Part 1)<br>March 19, 2022
+## Introduction to Practical Neural Networks and Deep Learning (Part 1)<br>March 18, 2023
 Instructions are given below for each of the five steps:
 * download Git software
 * download Docker software
@@ -20,22 +20,25 @@ Git is a very popular source code management tool for version control, widely us
 
 Estimated time: 15 mins.  
 Go to [Install Git](https://www.atlassian.com/git/tutorials/install-git), and scroll to Install Git on \[Mac OS X | Windows | Linux\] section as appropriate.  
-Unless you have a preference, probably just pick the first method for your platform.
+Unless you have a preference, you should probably just pick the first method for your platform.
  
 (For Mac:  
 Git for Mac Installer > pick latest link (currently `git-2.33.0-intel-universal-mavericks.dmg`);  
-if you're installing from a downloaded .dmg file, you may be blocked from opening the installation package; if you see
-"macOS cannot verify that this app is free from malware", go to _System Preferences_ > _Security & Privacy_ > click `Open Anyway` for that downloaded git-xxx.pkg file.  
+This version is more than a year old but for our purposes is perfectly ok.  
+If you want the latest version, go to [Git - Download for macOS](https://git-scm.com/download/mac) and follow instructions for your option, e.g. Homebrew or MacPorts.  
+If you're installing from a downloaded .dmg file, you may be blocked from opening the installation package; if you see something like
+"macOS cannot verify that this app is free from malware", go to _System Preferences_ > _Security & Privacy_ > _General_ tab, click the lock icon in lower corner to Unlock,  
+then under `Allow apps downloaded from` | `App Store and identified developers` > `Allow` that downloaded git-xxx.pkg file, if you're sure it is safe.  
 Install just Git; you should not need to install git-credential-osxkeychain helper.)
 
 ### How to download Docker software
 Docker is a very popular container technology. The containers run on _Docker Engine_.
 
 Estimated time: 15 mins.  
-Go to [Get Docker](https://docs.docker.com/get-docker/), and pick Docker \[Desktop for Mac | Desktop for Windows | for Linux\] to do the appropriate install.  
-For Mac and Windows, after installing Docker Desktop, find the application icon to run the _Docker_ app (_Docker Desktop_), so as to start _Docker Engine_;
-it could take about half a minute to start; then you could minimize or close the Docker _Dashboard_ window (double check that _Docker Desktop_ is still running).  
-For Linux, install _Docker Engine_ then start _Docker_.
+Go to [Get Docker](https://docs.docker.com/get-docker/), and pick Docker Desktop for \[Mac | Windows | Linux\] to do the appropriate install.  
+After installing Docker Desktop, find the application icon to run the _Docker_ app (_Docker Desktop_), so as to start _Docker Engine_;
+it could take about half a minute for _Docker Desktop_ window to start and open; then you could minimize or close that window (double check that _Docker Desktop_
+is still running).
 
 ### How to clone GitHub repository into local directory
 Estimated time: 10 mins.  
@@ -48,6 +51,7 @@ a repository can have many versions of the source code, each stored in its own b
 - Checkout the desired branch instead of master branch, with `git checkout chap1_30-hidden-neurons-3.0-eta`;
 that specific branch has the desired setup of demo code you want to run for this Part 1 class
 - Verify with `git branch` again that you are on the desired branch _chap1_30-hidden-neurons-3.0-eta_ which is now marked with an asterisk (*)
+- Use `ls -l` to see the files in the directory
 ```
 ~ $
 ~ $ git clone https://github.com/clkim/DeepLearningPython35.git
@@ -67,6 +71,18 @@ that specific branch has the desired setup of demo code you want to run for this
   chap2_fully-matrix-based-backpropagation-mini-batch
   chap6
   master
+
+~/DeepLearningPython35 $ ls -l
+total 158088
+-rw-r--r--   1 clkim  staff    492526 Feb 29  2020 MyNetwork
+-rw-r--r--   1 clkim  staff     14338 Mar 10 17:04 README.md
+...
+...
+-rw-r--r--   1 clkim  staff       770 Feb 29  2020 mnist_svm.py
+-rw-r--r--   1 clkim  staff      6398 Mar 11  2021 network.py
+-rw-r--r--   1 clkim  staff     15252 Feb 29  2020 network2.py
+-rw-r--r--@  1 clkim  staff     13000 Feb 29  2020 network3.py
+-rw-r--r--   1 clkim  staff      7394 Mar  8 23:34 test.py
 ~/DeepLearningPython35 $
 ```
 (Skip until class) To run the desired setup of demo code, "uncomment in" or "comment out" as appropriate the code in _test.py_ in order to specify
@@ -76,7 +92,7 @@ the neural network and deep learning configuration to run.
 in the chap1 branch, at command line run  
 `git diff ea229ac 6ba2425`  
 to see the small changes committed in the branch  
-(red text is deleted, green text is added; hit space bar once to scroll down one page;
+(red is for text deleted, green is for text added; hit space bar once to scroll down one page;
 when we see `(END)` of document, enter q to quit and get back to the command line).
 
 Acknowledgement: The repository is forked from the _DeepLearningPython35_ repository of _Michal Daniel Dobrzanski_ who ported the book's code from
@@ -87,11 +103,11 @@ Background: We want to set up a `bind mount` in the container whose source is th
 source code has been cloned from GitHub, in order that the source code on our local computer would be accessible from inside the container.  
 We also want to install the Python package _Numpy_ in the container we want to create.
 
-Ensure that you have already started Docker Engine, e.g. by running _Docker_ app (_Docker Desktop_) locally;  
+Ensure that you have already started Docker Engine by running _Docker_ app (_Docker Desktop_) locally;  
 and that you have already cloned the demo Python source code from GitHub, into the _DeepLearningPython35_ directory,
 as described above in "How to clone GitHub repository into local directory".
 
-You must be at the _DeepLearningPython35_ directory, because the `bind mount` being set up into the container references `pwd`, the current directory.  
+You must be at the _DeepLearningPython35_ directory, because the `bind mount` being set up into the container calls `pwd` to get name of the current directory.  
 `cd` into the directory _DeepLearningPython35_ if not already there.
 
 Estimated time: 20 - 30 mins.  
@@ -101,8 +117,8 @@ an environment manager tool; miniconda can be considered a mini version of Anaco
 - Then run `docker images` to verify the image _continuumio/miniconda3_ is downloaded  
 - Then run the given `docker` command to create a new container layer over the downloaded image
   - At the interactive shell command line inside the container, we check the conda version, with `conda --version`
-  - Then create our own environment, named _nndlbook_ for our use, with `conda create --nndlbook`
-  - (May be prompted to update to a new version of conda)
+  - Then create our own environment, named _nndlbook_ for our use, with `conda create --name nndlbook`
+  - (May be prompted to update to a new version of conda; if so, go ahead and follow the prompts to update)
   - Then we activate this new _nndlbook_ conda environment, with `conda activate nndlbook`
   - Next, do a confirming check that no packages are installed yet, with `conda list`
   - And do a sanity check that we do have python installed, with `python --version`
@@ -125,26 +141,18 @@ continuumio/miniconda3   latest    xxxxxxxxxxxx   n months ago    nnnMB
 ~/DeepLearningPython35 $ docker run -it --name deeplearning --mount type=bind,source="$(pwd)",target=/deeplearn continuumio/miniconda3
 
 (base) root@xxx:/# conda --version
-conda 4.10.3
+conda 22.11.1
 
 (base) root@xxx:/# conda create --name nndlbook
 Collecting package metadata (current_repodata.json): done
 ...
-< if see ==> WARNING: A newer version of conda exists. <==           >
-<         current version: 4.10.3                                    >
-<         latest version: 4.11.0                                     >
-< exit the 'conda create' command by entering n at prompt to Proceed >
-< then update conda by running the suggested command at prompt #:    >
-< conda update -n base -c defaults conda                             >
-< answer y to proceed                                                >
-< then re-run at command prompt #: conda create --name nndlbook      >
 Proceed ([y]/n)? y
 ...
 Executing transaction: done
 ...
 
 (base) root@xxx:/# conda --version
-conda 4.11.0
+conda 22.11.1
 
 (base) root@xxx:/# conda activate nndlbook
 
@@ -154,13 +162,12 @@ conda 4.11.0
 # Name                    Version                   Build  Channel
 
 (nndlbook) root@xxx:/# python --version
-Python 3.9.5
+Python 3.10.8
 
 (nndlbook) root@x:/# conda install numpy
 Collecting package metadata (current_repodata.json): done
 ...
 Proceed ([y]/n)? y
-...
 ...
 Executing transaction: done
 
@@ -168,8 +175,8 @@ Executing transaction: done
 < Should see list of packages including numpy and numpy-base >
 
 (nndlbook) root@xxx:/# python --version
-Python 3.9.7
-< note that we have a later Python version after installing Numpy >
+Python 3.10.8
+< No change; sometimes we get a later Python version after installing Numpy >
 
 (nndlbook) root@xxx:/# exit
 exit
@@ -194,7 +201,7 @@ If not, do `git checkout chap1_30-hidden-neurons-3.0-eta` to switch to that bran
 
 The commands shown in the text area below do the following; the text area also shows the _Terminal_ console response to the commands:
 - First, just verify we see the newly created container named _deeplearning_
-- At _DeepLearningPython35_ directory, start `docker` container _deeplearning_ and specifying option to attach an interactive shell,
+- At _DeepLearningPython35_ directory, start `docker` container _deeplearning_ and specify option to attach an interactive shell,
   with `docker container start -ai deeplearning`
   - At the interactive shell command line inside the container, we `cd` into the _deeplearn_ directory mounted into the container;
   when we created the container, we had bind that mount to the local _DeepLearningPython35_ directory,
@@ -202,7 +209,7 @@ The commands shown in the text area below do the following; the text area also s
   - And verify what conda environments we have, with `conda info --env` 
   - Then we activate our own previously created conda environment _nndlbook_, with `conda activate nndlbook`
   - We check the python version, with `python --version`
-  - Finally, we now run the demo code in _test.py_, with `python3.9 test.py`; use control-c to break out of the run if desired
+  - Finally, we now run the demo code in _test.py_, with `python3.xxx test.py`; use control-c to break out of the run if desired
   - After the run, we exit the container, with `exit`
 - Now we should be back at the Terminal console, in the _DeepLearningPython35_ directory
 ```
@@ -222,9 +229,9 @@ xxxxxxxxxxxx   continuumio/miniconda3   "/bin/bash"   xxx                    dee
 (base) root@xxx:/deeplearn# conda activate nndlbook
 
 (nndlbook) root@xxx:/deeplearn# python --version
-Python 3.9.7
+Python 3.10.8
 
-(nndlbook) root@xxx:/deeplearn# python3.9 test.py
+(nndlbook) root@xxx:/deeplearn# python3.10 test.py
 Epoch 0 : 8943 / 10000
 Epoch 1 : 9166 / 10000
 Epoch 2 : 9267 / 10000
@@ -232,6 +239,7 @@ Epoch 3 : 9340 / 10000
 Epoch 4 : 9337 / 10000
 Epoch 5 : 9374 / 10000
 Epoch 6 : 9386 / 10000
+...
 < On my late-2013 MacBook Pro, it takes about a minute to do Epoch 1 to Epoch 6; use control-c to break if desired >
 < Each epoch run uses the training images; then neural network is evaluated on test images >
 
