@@ -38,7 +38,8 @@ Estimated time: 15 mins.
 Go to [Get Docker](https://docs.docker.com/get-docker/), and pick Docker Desktop for \[Mac | Windows | Linux\] to do the appropriate install.  
 After installing Docker Desktop, find the application icon to run the _Docker_ app (_Docker Desktop_), so as to start _Docker Engine_;
 it could take about half a minute for _Docker Desktop_ window to start and open; then you could minimize or close that window (double check that _Docker Desktop_
-is still running).  
+is still running).
+
 #####Public Service Announcement
 Looks like currently Docker Desktop 4.24.0 (122432) for Mac has an issue being tracked here
 [Docker does not recover from resource saver mode](https://github.com/docker/for-mac/issues/6933).
