@@ -187,7 +187,7 @@ The commands shown in the text area below do the following; the text area also s
   - We can see the files in our local _DeepLearningPython35_ directory, including _test.py_, with `ls`
   - We can check the python version, with `python --version`
   - Now, we can run the demo code in _test.py_, with `python3.11 test.py`
-    - On my late-2013 MacBook Pro, it takes about 20s to complete first Epoch 0, so about a minute to finish Epoch 2
+    - On my late-2013 MacBook Pro, it takes about 10s - 15s to complete first Epoch 0, about a minute to finish Epoch 5
     - Each epoch run uses the training images; then neural network is evaluated on the 10000 test images
   - Use control-c to break out of the run as desired
   - After the run, we exit the container, with `exit`
