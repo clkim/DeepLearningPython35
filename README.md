@@ -40,7 +40,7 @@ After installing Docker Desktop, find the application icon to run the _Docker_ a
 it could take about half a minute for _Docker Desktop_ window to start and open; then you could minimize or close that window (double check that _Docker Desktop_
 is still running).
 
-#####Public Service Announcement
+##### Public Service Announcement
 Looks like currently Docker Desktop 4.24.0 (122432) for Mac has an issue being tracked here
 [Docker does not recover from resource saver mode](https://github.com/docker/for-mac/issues/6933).
 The workaround for me is: As soon as Docker Desktop starts, open Settings (wheel icon on top right) > left menu > Resources | Advanced
