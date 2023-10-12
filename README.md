@@ -1,5 +1,5 @@
 ## Running IEEE Boston Section class demo code
-## Introduction to Practical Neural Networks and Deep Learning (Part 1)<br>March 18, 2023
+## Introduction to Neural Networks and Deep Learning (Part 1)<br>October 21, 2023
 Instructions are given below for each of the five steps:
 * download Git software
 * download Docker software
@@ -25,7 +25,7 @@ Unless you have a preference, you should probably just pick the first method for
 (For Mac:  
 Git for Mac Installer > pick latest link (currently `git-2.33.0-intel-universal-mavericks.dmg`);  
 This version is more than a year old but for our purposes is perfectly ok.  
-If you want the latest version, go to [Git - Download for macOS](https://git-scm.com/download/mac) and follow instructions for your option, e.g. Homebrew or MacPorts.  
+If you want the latest version, go to [Git - Download for macOS](https://git-scm.com/download/mac) and follow instructions for your preference, e.g. Homebrew or MacPorts.  
 If you're installing from a downloaded .dmg file, you may be blocked from opening the installation package; if you see something like
 "macOS cannot verify that this app is free from malware", go to _System Preferences_ > _Security & Privacy_ > _General_ tab, click the lock icon in lower corner to Unlock,  
 then under `Allow apps downloaded from` | `App Store and identified developers` > `Allow` that downloaded git-xxx.pkg file, if you're sure it is safe.  
@@ -48,7 +48,7 @@ this downloads the demo source code from that specified repository into your loc
 - `cd DeepLearningPython35` into the repository directory; this changes your directory to the directory of the downloaded demo Python source code
 - Verify with `git branch` that you are on the _master_ branch of the repository; the branch you are on is marked with an asterisk (*);
 a repository can have many versions of the source code, each stored in its own branch
-- Checkout the desired branch instead of master branch, with `git checkout chap1_30-hidden-neurons-3.0-eta`;
+- Checkout the desired branch instead of _master_ branch, with `git checkout chap1_30-hidden-neurons-3.0-eta`;
 that specific branch has the desired setup of demo code you want to run for this Part 1 class
 - Verify with `git branch` again that you are on the desired branch _chap1_30-hidden-neurons-3.0-eta_ which is now marked with an asterisk (*)
 - Use `ls -l` to see the files in the directory
@@ -93,7 +93,7 @@ in the chap1 branch, at command line run
 `git diff ea229ac 6ba2425`  
 to see the small changes committed in the branch  
 (red is for text deleted, green is for text added; hit space bar once to scroll down one page;
-when we see `(END)` of document, enter q to quit and get back to the command line).
+when you see `(END)` of document, enter _q_ to quit and get back to the command line prompt).
 
 Acknowledgement: The repository is forked from the _DeepLearningPython35_ repository of _Michal Daniel Dobrzanski_ who ported the book's code from
 Python 2.7 to Python 3.5 and wrote the "orchestrator" testing file _test.py_.
@@ -132,13 +132,13 @@ docker.io/continuumio/anaconda3:latest
 
 ~/DeepLearningPython35 $ docker image ls
 REPOSITORY               TAG       IMAGE ID       CREATED         SIZE
-continuumio/anaconda3    latest    xxxxxxxxxxxx   n months ago    n.nnGB
+continuumio/anaconda3    latest    xxxxxxxxxxxx   nn days ago     n.nnGB
 
 ~/DeepLearningPython35 $ docker run -it --name deeplearning --mount type=bind,source="$(pwd)",target=/deeplearn continuumio/anaconda3
 
 (base) root@xxx:/#
 (base) root@xxx:/# conda --version
-conda 23.5.2
+conda 23.7.4
 
 (base) root@xxx:/# conda list | grep numpy
 numpy                     1.24.3          py311h08b1b3b_1
@@ -146,14 +146,14 @@ numpy-base                1.24.3          py311hf175353_1
 numpydoc                  1.5.0           py311h06a4308_0
 
 (base) root@xxx:/# python --version
-Python 3.11.3
+Python 3.11.5
 
 (base) root@xxx:/# exit
 exit
 
 ~/DeepLearningPython35 $ docker container ls --all
 CONTAINER ID   IMAGE                    COMMAND       CREATED      ...       NAMES
-xxxxxxxxxxxx   xxxxxxxxxxxx             "/bin/bash"   xxx                    deeplearning
+xxxxxxxxxxxx   continuumio/anaconda3    "/bin/bash"   xxx                    deeplearning
 ```
 
 ### How to run the demo Python code in the created Docker container
@@ -178,15 +178,17 @@ The commands shown in the text area below do the following; the text area also s
     which must be already on the git branch _chap1_30-hidden-neurons-3.0-eta_
   - We can see the files in our local _DeepLearningPython35_ directory, including _test.py_, with `ls`
   - We can check the python version, with `python --version`
-  - Now, we can run the demo code in _test.py_, with `python3.xx test.py`
-  - Use control-c to break out of the run if desired
+  - Now, we can run the demo code in _test.py_, with `python3.11 test.py`
+    - On my late-2013 MacBook Pro, it takes about 20s to complete first Epoch 0, so about a minute to finish Epoch 2
+    - Each epoch run uses the training images; then neural network is evaluated on the 10000 test images
+  - Use control-c to break out of the run as desired
   - After the run, we exit the container, with `exit`
 - Now we should be back at the Terminal console, in the _DeepLearningPython35_ directory
 ```
 ~/DeepLearningPython35 $
 ~/DeepLearningPython35 $ docker container ls --all
 CONTAINER ID   IMAGE                    COMMAND       CREATED      ...       NAMES
-xxxxxxxxxxxx   xxxxxxxxxxxx             "/bin/bash"   xxx                    deeplearning
+xxxxxxxxxxxx   continuumio/anaconda3    "/bin/bash"   xxx                    deeplearning
 
 ~/DeepLearningPython35 $ docker container start -ai deeplearning
 
@@ -201,7 +203,7 @@ MyNetwork  __pycache__	    mnist.pkl.gz	       mnist_expanded.pkl.gz  mnist_svm.
 README.md  expand_mnist.py  mnist_average_darkness.py  mnist_loader.py	      network.py    network3.py
 
 (base) root@xxx:/deeplearn# python --version
-Python 3.11.3
+Python 3.11.5
 
 (base) root@xxx:/deeplearn# python3.11 test.py
 Epoch 0 : 8943 / 10000
@@ -212,15 +214,13 @@ Epoch 4 : 9337 / 10000
 Epoch 5 : 9374 / 10000
 Epoch 6 : 9386 / 10000
 ...
-< On my late-2013 MacBook Pro, it takes about 10s to complete first Epoch 0, so about a minute to finish Epoch 5 >
-< use control-c to break if desired >
-< Each epoch run uses the training images; then neural network is evaluated on the 10000 test images >
+< Use control-c to break out of the run as desired >
 
 (base) root@xxx:/deeplearn# exit
 exit
 ~/DeepLearningPython35 $
 ```
-## End of Running IEEE Boston Section class demo code: Introduction to Practical Neural Networks and Deep Learning (Part 1)
+## End of Running IEEE Boston Section class demo code: Introduction to Neural Networks and Deep Learning (Part 1)
 ___
 
 ## Overview
