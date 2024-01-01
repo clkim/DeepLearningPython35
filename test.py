@@ -207,4 +207,7 @@ net = Network([
                   activation_fn=ReLU),
     FullyConnectedLayer(n_in=40*4*4, n_out=100, activation_fn=ReLU),
     SoftmaxLayer(n_in=100, n_out=10)], mini_batch_size)
-net.SGD(training_data, 60, mini_batch_size, 0.03, validation_data, test_data, lmbda=0.1)
+# increasse lambda to maintain weight decay factor because in network3 SGD method's cost formula we added the mini_batch_size term to correctly get 'n' in denominator; see network3.py
+# increase eta slightly to 0.035 to try to get classification accuracy, after our fixes/corrections in network3.py, to be similar to 99.23% reported by author; got 99.27% on test data set
+net.SGD(training_data, 60, mini_batch_size, 0.035, validation_data, test_data, lmbda=1.0)  # lambda increased by same factor of 10 as the mini_batch_size; eta increased by experimentation
+#net.SGD(training_data, 60, mini_batch_size, 0.03, validation_data, test_data, lmbda=0.1)

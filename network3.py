@@ -115,7 +115,8 @@ class Network(object):
         # define the (regularized) cost function, symbolic gradients, and updates
         l2_norm_squared = sum([(layer.w**2).sum() for layer in self.layers])
         cost = self.layers[-1].cost(self)+\
-               0.5*lmbda*l2_norm_squared/num_training_batches
+               0.5*lmbda*l2_norm_squared/(mini_batch_size * num_training_batches)  # from Chap 3 Eqn 87: should divide by n, not just num_training_batches
+               #0.5*lmbda*l2_norm_squared/num_training_batches
         grads = T.grad(cost, self.params)
         updates = [(param, param-eta*grad)
                    for param, grad in zip(self.params, grads)]
@@ -209,10 +210,12 @@ class ConvPoolLayer(object):
         self.poolsize = poolsize
         self.activation_fn=activation_fn
         # initialize weights and biases
-        n_out = (filter_shape[0]*np.prod(filter_shape[2:])/np.prod(poolsize))
+        n_in = np.prod(image_shape[1:])  # for use in self.w random initialization
+        #n_out = (filter_shape[0]*np.prod(filter_shape[2:])/np.prod(poolsize))  # author pointed out inadvertent mistake to use 'n_out'
         self.w = theano.shared(
             np.asarray(
-                np.random.normal(loc=0, scale=np.sqrt(1.0/n_out), size=filter_shape),
+                np.random.normal(loc=0, scale=np.sqrt(1.0/n_in), size=filter_shape),  # author pointed out should use 'n_in' in *Note next to code for FullyConnectedLayer
+                #np.random.normal(loc=0, scale=np.sqrt(1.0/n_out), size=filter_shape),
                 dtype=theano.config.floatX),
             borrow=True)
         self.b = theano.shared(
@@ -244,7 +247,8 @@ class FullyConnectedLayer(object):
         self.w = theano.shared(
             np.asarray(
                 np.random.normal(
-                    loc=0.0, scale=np.sqrt(1.0/n_out), size=(n_in, n_out)),
+                    loc=0.0, scale=np.sqrt(1.0/n_in), size=(n_in, n_out)),  # author pointed out should use 'n_in' in *Note next to code for FullyConnectedLayer
+                    #loc=0.0, scale=np.sqrt(1.0/n_out), size=(n_in, n_out)),
                 dtype=theano.config.floatX),
             name='w', borrow=True)
         self.b = theano.shared(
