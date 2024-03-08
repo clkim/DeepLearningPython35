@@ -20,7 +20,7 @@ Git is a very popular source code management tool for version control, widely us
 
 Estimated time: 15 mins.  
 Go to [Install Git](https://github.com/git-guides/install-git), and scroll to Install Git on \[Windows | Mac | Linux\] section as appropriate.  
-Suggestion: unless you have a preference, check out the link labelled `git-scm` in the Windows and Mac sections, but also see note on Mac below.
+Suggestion: unless you have a preference, look into the link labelled `git-scm` in the Windows and Mac sections, but also see note on Mac below.
  
 (For Mac:  
 The link labelled `macOS Git Installer` seems quite old and no longer updated.  
@@ -37,9 +37,9 @@ it could take about half a minute for _Docker Desktop_ window to start and open;
 is still running).
 
 ##### Public Service Announcement
-Looks like my installed Docker Desktop 4.24.0 (122432) for Mac has an issue tracked here
+It looks like my installed Docker Desktop 4.24.0 (122432) for Mac has an issue tracked here
 [Docker does not recover from resource saver mode](https://github.com/docker/for-mac/issues/6933); see my work-around below.  
-If you are using Mac and not on macOS Monterey (version 12), it seems that Docker Desktop 4.25.0 is not available, so try downloading 4.24.x and do my work-around.
+If you are using Mac but not on macOS Monterey (version 12) or later, it seems that Docker Desktop 4.25.0 is not available, so try downloading 4.24.x and do my work-around.
 Otherwise, download the latest version (currently 4.28.0) and hopefully the issue has been fixed.  
 I'm staying on Docker Desktop 4.24.0 since my Mac is on Big Sur (version 11); will be getting a new Mac soon :)  
  
@@ -117,16 +117,16 @@ as described above in "How to clone GitHub repository into local directory".
 You must be at the _DeepLearningPython35_ directory, because the `bind mount` being set up into the container calls `pwd` to get name of the current directory.  
 `cd` into the directory _DeepLearningPython35_ if not already there.
 
-Estimated time: 10 mins.  
+Estimated time: 15 mins.  
 The commands shown in the text area below do the following; the text area also shows the _Terminal_ console response to the commands:
 - First run `docker pull continuumio/miniconda3:yy.x.x-x` to download the _Miniconda_ image (based on Python 3.X), a minimal installer for Python and _conda_, a package manager as well as
-an environment manager tool; it is a small version of Anaconda, which is a very popular data science platform; the download is from the Docker hub [docker-miniconda](https://hub.docker.com/r/continuumio/miniconda3)
+an environment manager tool; Miniconda is a small version of Anaconda, which is a very popular data science platform; the download source is the Docker hub [docker-miniconda](https://hub.docker.com/r/continuumio/miniconda3)
 - Then run `docker image ls` to verify the image _continuumio/miniconda3_ (with Tag _yy.x.x-x_) is downloaded  
-- Then run the given `docker` command to create a new container layer over the downloaded image
+- Now run the given `docker` command to create a new container layer over the downloaded image
   - At the interactive shell command line inside the new container, we can look for the conda version, with `conda --version`
   - (May be prompted to update to a new version of conda; if so, go ahead and follow the prompts to update)
-  - Double-check that the Python packages we want to install are not present, and that there is only the `base` environment
-  - Install in a new environment: Python 3.6 (latest that supports Theano), and _Numpy_ and _Theano_, with `conda create -n py36numpytheano python=3.6 numpy theano`
+  - Double-check that the Python packages we want to install are not present, and that there is only the `base` (python virtual) environment
+  - Create and install in a new environment: Python 3.6 (latest that supports Theano), and _Numpy_ and _Theano_, with `conda create -n py36numpytheano python=3.6 numpy theano`
     - Double-check we have the newly created environment named `py36numpytheano`, with `conda env list` 
   - Activate the newly created environment, with `conda activate py36numpytheano`
   - Do a `ls` to look for the `bind mount` target directory `deeplearn` that we named when creating the new container, then do a `cd` to change into that directory
