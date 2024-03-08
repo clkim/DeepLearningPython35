@@ -68,16 +68,12 @@ that specific branch has the desired setup of demo code you want to run for this
 
 ~/DeepLearningPython35 $ git branch
   chap1_30-hidden-neurons-3.0-eta
-  chap2_fully-matrix-based-backpropagation-mini-batch
-  chap6
 * master
 
 ~/DeepLearningPython35 $ git checkout chap1_30-hidden-neurons-3.0-eta
 
 ~/DeepLearningPython35 $ git branch
 * chap1_30-hidden-neurons-3.0-eta
-  chap2_fully-matrix-based-backpropagation-mini-batch
-  chap6
   master
 
 ~/DeepLearningPython35 $ ls -l
