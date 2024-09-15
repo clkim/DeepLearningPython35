@@ -1,5 +1,5 @@
 ## Running IEEE Boston Section class demo code
-## Introduction to Neural Networks and Deep Learning (Part 1)<br>March 16, 2024
+## Introduction to Neural Networks and Deep Learning (Part 1)<br>October 26, 2024
 Instructions are given below for each of the five steps:
 * download Git software
 * download Docker software
@@ -23,7 +23,7 @@ Go to [Install Git](https://github.com/git-guides/install-git), and scroll to In
 Suggestion: unless you have a preference, look into the link labelled `git-scm` in the Windows and Mac sections, but also see note on Mac below.
  
 (For Mac:  
-The link labelled `macOS Git Installer` seems quite old and no longer updated.  
+Do NOT click on link `macOS Git Installer` because it is labeled "abandoned" so is NOT recommended.  
 Most MacOS will already have Git installed; even though the version is likely to be old, it is probably sufficient for our purpose here.  
 If you want the latest version, use the link [git-scm](https://git-scm.com/download/mac) and follow instructions; we suggest using Homebrew.)  
 
@@ -37,11 +37,12 @@ it could take about half a minute for _Docker Desktop_ window to start and open;
 is still running).
 
 ##### Public Service Announcement
-It looks like my installed Docker Desktop 4.24.0 (122432) for Mac has an issue tracked here
+It looks like my installed Docker Desktop 4.24.2 (124339) for Mac has an issue tracked here
 [Docker does not recover from resource saver mode](https://github.com/docker/for-mac/issues/6933); see my work-around below.  
-If you are using Mac but not on macOS Monterey (version 12) or later, it seems that Docker Desktop 4.25.0 is not available, so try downloading 4.24.x and do my work-around.
-Otherwise, download the latest version (currently 4.28.0) and hopefully the issue has been fixed.  
-I'm staying on Docker Desktop 4.24.0 since my Mac is on Big Sur (version 11); will be getting a new Mac soon :)  
+If you are using Mac but not on macOS Monterey (version 12) or later, it seems that Docker Desktop 4.25.0+ is not available,
+so try downloading latest 4.24.x and do my work-around.
+Otherwise, download at least version 4.34.2 which reportedly fixes the issue.  
+I'm staying on Docker Desktop 4.24.2 since my Mac is on Big Sur (version 11); will be getting a new Mac soon :)  
  
 The workaround for me is: As soon as Docker Desktop starts, open Settings (wheel icon on top right) > left menu > Resources | Advanced
 >Scroll down to Resource Saver > unset Enable Resource Saver > click Apply & restart button.  
@@ -50,14 +51,14 @@ The workaround for me is: As soon as Docker Desktop starts, open Settings (wheel
 
 ### How to clone GitHub repository into local directory
 Estimated time: 10 mins.  
-The commands shown in the text area below do the following; the text area also shows the _Terminal_ console response to the commands:  
-- Clone with `git clone https://github.com/...` the specified _GitHub_ repository at a Terminal command line;
-this downloads the demo source code from that specified repository into your local computer
+The commands shown in the text area below do the following listed items; the text area also shows the _Terminal_ console response to the commands:  
+- At a Terminal command line, clone with `git clone https://github.com/<path>` the specified _GitHub_ repository;
+this downloads the demo source code from my repository into your local computer
 - `cd DeepLearningPython35` into the repository directory; this changes your directory to the directory of the downloaded demo Python source code
 - Verify with `git branch` that you are on the _master_ branch of the repository; the branch you are on is marked with an asterisk (*);
 a repository can have many versions of the source code, each stored in its own branch
-- Checkout the desired branch instead of _master_ branch, with `git checkout chap1_30-hidden-neurons-3.0-eta`;
-that specific branch has the desired setup of demo code you want to run for this Part 1 class
+- Checkout the desired branch instead of _master_ branch, with `git checkout <branchname>`; that specific branch has the desired setup of demo code you want to run.  
+  - For the Part 1 class: `git checkout chap1_30-hidden-neurons-3.0-eta`
 - Verify with `git branch` again that you are on the desired branch _chap1_30-hidden-neurons-3.0-eta_ which is now marked with an asterisk (*)
 - Use `ls -l` to see the files in the directory
 ```
@@ -114,11 +115,11 @@ You must be at the _DeepLearningPython35_ directory, because the `bind mount` be
 `cd` into the directory _DeepLearningPython35_ if not already there.
 
 Estimated time: 15 mins.  
-The commands shown in the text area below do the following; the text area also shows the _Terminal_ console response to the commands:
-- First run `docker pull continuumio/miniconda3:yy.x.x-x` to download the _Miniconda_ image (based on Python 3.X), a minimal installer for Python and _conda_, a package manager as well as
-an environment manager tool; Miniconda is a small version of Anaconda, which is a very popular data science platform; the download source is the Docker hub [docker-miniconda](https://hub.docker.com/r/continuumio/miniconda3)
+The commands shown in the text area below do the following listed items; the text area also shows the _Terminal_ console response to the commands:
+- First run `docker pull continuumio/miniconda3:yy.x.x-x` to download the tagged _miniconda3_ image (based on Python 3.X), a minimal installer for Python and _conda_, a package manager as well as
+an environment manager tool; Miniconda is a small version of Anaconda, which is a very popular data science platform; the download source is the Docker hub [docker-miniconda > Tags](https://hub.docker.com/r/continuumio/miniconda3/tags)
 - Then run `docker image ls` to verify the image _continuumio/miniconda3_ (with Tag _yy.x.x-x_) is downloaded  
-- Now run the given `docker` command to create a new container layer over the downloaded image
+- Now run the below given `docker` command to create a new container layer over the downloaded image
   - At the interactive shell command line inside the new container, we can look for the conda version, with `conda --version`
   - (May be prompted to update to a new version of conda; if so, go ahead and follow the prompts to update)
   - Double-check that the Python packages we want to install are not present, and that there is only the `base` (python virtual) environment
@@ -132,24 +133,24 @@ an environment manager tool; Miniconda is a small version of Anaconda, which is 
 - Back at the Terminal console, verify that we have created a local container named _deeplearning_, with `docker container ls --all`
 ```
 ~/DeepLearningPython35 $
-~/DeepLearningPython35 $ docker pull continuumio/miniconda3:24.1.2-0
-24.1.2-0: Pulling from continuumio/miniconda3
+~/DeepLearningPython35 $ docker pull continuumio/miniconda3:24.7.1-0
+24.7.1-0: Pulling from continuumio/miniconda3
 ...
-docker.io/continuumio/miniconda3:24.1.2-0
+docker.io/continuumio/miniconda3:24.7.1-0
 
 ~/DeepLearningPython35 $
 ~/DeepLearningPython35 $ docker image ls
 REPOSITORY               TAG       IMAGE ID       CREATED         SIZE
-continuumio/miniconda3   24.1.2-0  xxxxxxxxxxxx   nn .... ago     nnnMB
+continuumio/miniconda3   24.7.1-0  xxxxxxxxxxxx   nn .... ago     nnnMB
 
 ~/DeepLearningPython35 $
-~/DeepLearningPython35 $ docker run -it --name deeplearning --mount type=bind,source="$(pwd)",target=/deeplearn continuumio/miniconda3:24.1.2-0
+~/DeepLearningPython35 $ docker run -it --name deeplearning --mount type=bind,source="$(pwd)",target=/deeplearn continuumio/miniconda3:24.7.1-0
 
 (base) root@xxx:/#
 (base) root@xxx:/# conda --version
-conda 24.1.2
+conda 24.7.1
 (base) root@xxx:/# python --version
-Python 3.11.7
+Python 3.12.4
 
 (base) root@xxx:/#
 (base) root@xxx:/# conda list | grep numpy
@@ -230,7 +231,7 @@ exit
 ~/DeepLearningPython35 $
 ~/DeepLearningPython35 $ docker container ls --all
 CONTAINER ID   IMAGE                              COMMAND       CREATED      ...       NAMES
-xxxxxxxxxxxx   continuumio/miniconda3:24.1.2-0    "/bin/bash"   xxx                    deeplearning
+xxxxxxxxxxxx   continuumio/miniconda3:24.7.1-0    "/bin/bash"   xxx                    deeplearning
 ```
 
 ### How to run the demo Python code in the created Docker container
@@ -241,11 +242,13 @@ in "How to clone GitHub repository into local directory".
 
 `cd` into the directory _DeepLearningPython35_ if not already there.
 
-You must be on the branch _chap1_30-hidden-neurons-3.0-eta_.  
-Verify with `git branch` (see section on "How to clone GitHub repository into local directory").  
-If not, do `git checkout chap1_30-hidden-neurons-3.0-eta` to switch to that branch, then verify with `git branch`.
+You must be on the specified branch for the class
+- For the Part 1 class: _chap1_30-hidden-neurons-3.0-eta_
 
-The commands shown in the text area below do the following; the text area also shows the _Terminal_ console response to the commands:
+Verify with `git branch` (see section on "How to clone GitHub repository into local directory").  
+If not, do e.g. for Part 1 class `git checkout chap1_30-hidden-neurons-3.0-eta` to switch to that branch, then verify with `git branch`.
+
+The commands shown in the text area below do the following listed items; the text area also shows the _Terminal_ console response to the commands:
 - First, just verify we see the newly created container named _deeplearning_
 - At _DeepLearningPython35_ directory, start `docker` container _deeplearning_ and specify option to attach an interactive shell,  
   with `docker container start -ai deeplearning`
@@ -266,7 +269,7 @@ The commands shown in the text area below do the following; the text area also s
 ~/DeepLearningPython35 $
 ~/DeepLearningPython35 $ docker container ls --all
 CONTAINER ID   IMAGE                              COMMAND       CREATED      ...       NAMES
-xxxxxxxxxxxx   continuumio/miniconda3:24.1.2-0    "/bin/bash"   xxx                    deeplearning
+xxxxxxxxxxxx   continuumio/miniconda3:24.7.1-0    "/bin/bash"   xxx                    deeplearning
 
 ~/DeepLearningPython35 $
 ~/DeepLearningPython35 $ docker container start -ai deeplearning
