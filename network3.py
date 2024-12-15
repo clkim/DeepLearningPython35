@@ -210,7 +210,7 @@ class ConvPoolLayer(object):
         self.poolsize = poolsize
         self.activation_fn=activation_fn
         # initialize weights and biases
-        n_in = np.prod(image_shape[1:])  # for use in self.w random initialization
+        n_in = np.prod(filter_shape[1:])  # for use in self.w random initialization
         #n_out = (filter_shape[0]*np.prod(filter_shape[2:])/np.prod(poolsize))  # author pointed out inadvertent mistake to use 'n_out'
         self.w = theano.shared(
             np.asarray(
