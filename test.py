@@ -195,6 +195,7 @@ net.SGD(training_data, 60, mini_batch_size, 0.1, validation_data, test_data)
 '''
 
 # chapter 6 -  rectified linear units and some l2 regularization (lmbda=0.1) => even better accuracy
+'''
 from network3 import ReLU
 net = Network([
     ConvPoolLayer(image_shape=(mini_batch_size, 1, 28, 28),
@@ -211,3 +212,26 @@ net = Network([
 # try keep eta=0.03, after fixing incorrect conv-pooling layer n_in previously introduced; try keep lambda=1.0 since now not seeing the 10 - 20% of runs getting stuck in local minima; accuracy close to author reported 99.23%, got 99.20% on test data set
 net.SGD(training_data, 60, mini_batch_size, 0.03, validation_data, test_data, lmbda=1.0)  # lambda increased by same factor of 10 as the mini_batch_size; could experiment with eta 0.035 to try get closer to author's reported accuracy
 #net.SGD(training_data, 60, mini_batch_size, 0.03, validation_data, test_data, lmbda=0.1)
+'''
+
+# chapter 6 - add second fully-connected layer, increase to 1000 neurons, add 0.5 dropout (no L2 regularization); use expanded data set
+expanded_training_data, _, _ = network3.load_data_shared("mnist_expanded.pkl.gz")
+
+from network3 import ReLU
+net = Network([
+    ConvPoolLayer(image_shape=(mini_batch_size, 1, 28, 28),
+                  filter_shape=(20, 1, 5, 5),
+                  poolsize=(2, 2),
+                  activation_fn=ReLU),
+    ConvPoolLayer(image_shape=(mini_batch_size, 20, 12, 12),
+                  filter_shape=(40, 20, 5, 5),
+                  poolsize=(2, 2),
+                  activation_fn=ReLU),
+    FullyConnectedLayer(
+        n_in=40*4*4, n_out=1000, activation_fn=ReLU, p_dropout=0.5),
+    FullyConnectedLayer(
+        n_in=1000, n_out=1000, activation_fn=ReLU, p_dropout=0.5),
+    SoftmaxLayer(n_in=1000, n_out=10, p_dropout=0.5)],
+    mini_batch_size)
+net.SGD(expanded_training_data, 40, mini_batch_size, 0.03,
+        validation_data, test_data)
