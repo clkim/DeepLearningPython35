@@ -1,5 +1,5 @@
 ## Running IEEE Boston Section class demo code
-## Introduction to Neural Networks and Deep Learning (Part 1)<br>October 26, 2024
+## Introduction to Neural Networks and Deep Learning (Part 1)<br>March 22, 2025
 Instructions are given below for each of the five steps:
 * download Git software
 * download Docker software
@@ -13,7 +13,7 @@ we decided to create a _Docker_ container and to run the demo code in it.
 In software engineering parlance, a _container_ packages up code and all its dependencies into a standard unit of software so that the application can run
 anywhere, as long as the container engine supports the underlying operating system.  
 Docker is sufficiently popular nowadays so that installing as well as running Docker on different platforms should be well supported and documented.
-Personal and small business use is still free, though a sign-up for a Docker account may be required.
+Personal and most small business use is still free, though a sign-up for a Docker account may be required.
 
 ### How to download Git software
 Git is a very popular source code management tool for version control, widely used among software professionals.
@@ -23,7 +23,7 @@ Go to [Install Git](https://github.com/git-guides/install-git), and scroll to In
 Suggestion: unless you have a preference, look into the link labelled `git-scm` in the Windows and Mac sections, but also see note on Mac below.
  
 (For Mac:  
-Do NOT click on link `macOS Git Installer` because it is labeled "abandoned" so is NOT recommended.  
+Do NOT click on link `macOS Git Installer` because it is labeled _abandoned_ so is NOT recommended.  
 Most MacOS will already have Git installed; even though the version is likely to be old, it is probably sufficient for our purpose here.  
 If you want the latest version, use the link [git-scm](https://git-scm.com/download/mac) and follow instructions; we suggest using Homebrew.)  
 
@@ -40,8 +40,9 @@ is still running).
 It looks like my installed Docker Desktop 4.24.2 (124339) for Mac has an issue tracked here
 [Docker does not recover from resource saver mode](https://github.com/docker/for-mac/issues/6933); see my work-around below.  
 If you are using Mac but not on macOS Monterey (version 12) or later, it seems that Docker Desktop 4.25.0+ is not available,
-so try downloading latest 4.24.x and do my work-around.
-Otherwise, download at least version 4.34.2 which reportedly fixes the issue.  
+so try downloading latest 4.24.x (sorry, you'd need to [google around](https://forums.docker.com/t/where-can-i-download-an-older-version-of-docker-desktop-for-mac/139977/4)
+because the direct downloads don't seem available anymore) and do my work-around below.
+Otherwise, download at least version 4.38.0, because the issue linked above had a report dated Jan 10, 2025, of seeing the problem in version 4.37.2.  
 I'm staying on Docker Desktop 4.24.2 since my Mac is on Big Sur (version 11); will be getting a new Mac soon :)  
  
 The workaround for me is: As soon as Docker Desktop starts, open Settings (wheel icon on top right) > left menu > Resources | Advanced
@@ -51,13 +52,13 @@ The workaround for me is: As soon as Docker Desktop starts, open Settings (wheel
 
 ### How to clone GitHub repository into local directory
 Estimated time: 10 mins.  
-The commands shown in the text area below do the following listed items; the text area also shows the _Terminal_ console response to the commands:  
+The commands shown in the text-block area below do the following listed items; the text-block area also shows the _Terminal_ console response to the commands:  
 - At a Terminal command line, clone with `git clone https://github.com/<path>` the specified _GitHub_ repository;
 this downloads the demo source code from my repository into your local computer
 - `cd DeepLearningPython35` into the repository directory; this changes your directory to the directory of the downloaded demo Python source code
 - Verify with `git branch` that you are on the _master_ branch of the repository; the branch you are on is marked with an asterisk (*);
 a repository can have many versions of the source code, each stored in its own branch
-- Checkout the desired branch instead of _master_ branch, with `git checkout <branchname>`; that specific branch has the desired setup of demo code you want to run.  
+- Checkout the desired branch instead of _master_ branch, with `git checkout <branchname>`; that specific branch has the desired setup of demo code you want to run  
   - For the Part 1 class: `git checkout chap1_30-hidden-neurons-3.0-eta`
 - Verify with `git branch` again that you are on the desired branch _chap1_30-hidden-neurons-3.0-eta_ which is now marked with an asterisk (*)
 - Use `ls -l` to see the files in the directory
@@ -93,12 +94,12 @@ total 158088
 (Skip until class) To run the desired setup of demo code, "uncomment in" or "comment out" as appropriate the code in _test.py_ in order to specify
 the neural network and deep learning configuration to run.
 
-(Skip until class) To see an example of the (flexible but somewhat hackish and minimalist) changes I made in _test.py_ in order to run the demo
-in the chap1 branch, at command line run  
+(Skip until class) To see an example of the flexible but somewhat hackish and minimalist changes I made in _test.py_ in order to run the desired demo:  
+(Note: red is for text deleted, green is for text added; hit space bar once to scroll down one page;
+when you see `(END)` of document, enter _q_ to quit and get back to the command line prompt.)
+- For the Part 1 class: in the _chap1_30-hidden-neurons-3.0-eta_ branch, at command line run  
 `git diff ea229ac 6ba2425`  
-to see the small changes committed in the branch  
-(red is for text deleted, green is for text added; hit space bar once to scroll down one page;
-when you see `(END)` of document, enter _q_ to quit and get back to the command line prompt).
+to see the small changes to the _test.py_ file in that branch
 
 Acknowledgement: The repository is forked from the _DeepLearningPython35_ repository of _Michal Daniel Dobrzanski_ who ported the book's code from
 Python 2.7 to Python 3.5 and wrote the "orchestrator" testing file _test.py_.
@@ -115,7 +116,7 @@ You must be at the _DeepLearningPython35_ directory, because the `bind mount` be
 `cd` into the directory _DeepLearningPython35_ if not already there.
 
 Estimated time: 15 mins.  
-The commands shown in the text area below do the following listed items; the text area also shows the _Terminal_ console response to the commands:
+The commands shown in the text-block area below do the following listed items; the text-block area also shows the _Terminal_ console response to the commands:
 - First run `docker pull continuumio/miniconda3:yy.x.x-x` to download the tagged _miniconda3_ image (based on Python 3.X), a minimal installer for Python and _conda_, a package manager as well as
 an environment manager tool; Miniconda is a small version of Anaconda, which is a very popular data science platform; the download source is the Docker hub [docker-miniconda > Tags](https://hub.docker.com/r/continuumio/miniconda3/tags)
 - Then run `docker image ls` to verify the image _continuumio/miniconda3_ (with Tag _yy.x.x-x_) is downloaded  
@@ -123,46 +124,48 @@ an environment manager tool; Miniconda is a small version of Anaconda, which is 
   - At the interactive shell command line inside the new container, we can look for the conda version, with `conda --version`
   - (May be prompted to update to a new version of conda; if so, go ahead and follow the prompts to update)
   - Double-check that the Python packages we want to install are not present, and that there is only the `base` (python virtual) environment
-  - Create and install in a new environment: Python 3.6 (latest that supports Theano), and _Numpy_ and _Theano_, with `conda create -n py36numpytheano python=3.6 numpy theano`
-    - Double-check we have the newly created environment named `py36numpytheano`, with `conda env list` 
-  - Activate the newly created environment, with `conda activate py36numpytheano`
+  - Create and install in a new environment: Python 3.9 (supports Theano latest maintenance version), and _Numpy_ and _Theano_, with `conda create -n py39numpy1235theano105 python=3.9 numpy=1.23.5 theano=1.0.5`
+    - Double-check we have the newly created environment named `py39numpy1235theano105`, with `conda env list` 
+  - Activate the newly created environment, with `conda activate py39numpy1235theano105`
   - Do a `ls` to look for the `bind mount` target directory `deeplearn` that we named when creating the new container, then do a `cd` to change into that directory
   - Now do a `ls`, we should see the files in the _DeepLearningPython35_ directory
   - Do a sanity check that we will be running the python version we installed in the new environment, with `python --version`
   - Ok, exit our newly created local container, with `exit`
-- Back at the Terminal console, verify that we have created a local container named _deeplearning_, with `docker container ls --all`
+- Back at the Terminal console, verify that we have created a local container named _deeplearning_, with `docker container ls --latest`
 ```
 ~/DeepLearningPython35 $
-~/DeepLearningPython35 $ docker pull continuumio/miniconda3:24.7.1-0
-24.7.1-0: Pulling from continuumio/miniconda3
+~/DeepLearningPython35 $ docker pull continuumio/miniconda3:25.1.1-2
+25.1.1-2: Pulling from continuumio/miniconda3
 ...
-docker.io/continuumio/miniconda3:24.7.1-0
+...
+docker.io/continuumio/miniconda3:25.1.1-2
+...
 
 ~/DeepLearningPython35 $
 ~/DeepLearningPython35 $ docker image ls
 REPOSITORY               TAG       IMAGE ID       CREATED         SIZE
-continuumio/miniconda3   24.7.1-0  xxxxxxxxxxxx   nn .... ago     nnnMB
+continuumio/miniconda3   25.1.1-2  xxxxxxxxxxxx   nn .... ago     nnnMB
 
 ~/DeepLearningPython35 $
-~/DeepLearningPython35 $ docker run -it --name deeplearning --mount type=bind,source="$(pwd)",target=/deeplearn continuumio/miniconda3:24.7.1-0
+~/DeepLearningPython35 $ docker run -it --name deeplearning --mount type=bind,source="$(pwd)",target=/deeplearn continuumio/miniconda3:25.1.1-2
 
 (base) root@xxx:/#
 (base) root@xxx:/# conda --version
-conda 24.7.1
+conda 25.1.1
 (base) root@xxx:/# python --version
-Python 3.12.4
+Python 3.12.9
 
 (base) root@xxx:/#
 (base) root@xxx:/# conda list | grep numpy
 (base) root@xxx:/# conda list | grep theano
+
 (base) root@xxx:/# conda env list
 # conda environments:
 #
 base                  *  /opt/conda
 
-
 (base) root@xxx:/# 
-(base) root@xxx:/# conda create -n py36numpytheano python=3.6 numpy theano
+(base) root@xxx:/# conda create -n py39numpy1235theano105 python=3.9 numpy=1.23.5 theano=1.0.5
 Channels:
  - defaults
 Platform: linux-64
@@ -171,12 +174,12 @@ Solving environment: done
 
 ## Package Plan ##
 
-  environment location: /opt/conda/envs/py36numpytheano
+  environment location: /opt/conda/envs/py39numpy1235theano105
 
   added / updated specs:
-    - numpy
-    - python=3.6
-    - theano
+    - numpy=1.23.5
+    - python=3.9
+    - theano=1.0.5
 
 The following packages will be downloaded:
 ...
@@ -194,7 +197,7 @@ Executing transaction: done
 #
 # To activate this environment, use
 #
-#     $ conda activate py36numpytheano
+#     $ conda activate py39numpy1235theano105
 #
 # To deactivate an active environment, use
 #
@@ -206,32 +209,32 @@ Executing transaction: done
 # conda environments:
 #
 base                  *  /opt/conda
-py36numpytheano          /opt/conda/envs/py36numpytheano
+py39numpy1235theano105   /opt/conda/envs/py39numpy1235theano105
 
 (base) root@xxx:/#
-(base) root@xxx:/# conda activate py36numpytheano
+(base) root@xxx:/# conda activate py39numpy1235theano105
 
-(py36numpytheano) root@xxx:/#
-(py36numpytheano) root@xxx:/# ls
+(py39numpy1235theano105) root@xxx:/#
+(py39numpy1235theano105) root@xxx:/# ls
 bin  boot  deeplearn  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
-(py36numpytheano) root@xxx:/#
-(py36numpytheano) root@xxx:/# cd deeplearn/
-(py36numpytheano) root@xxx:/deeplearn# 
-(py36numpytheano) root@xxx:/deeplearn# ls
+(py39numpy1235theano105) root@xxx:/#
+(py39numpy1235theano105) root@xxx:/# cd deeplearn/
+
+(py39numpy1235theano105) root@xxx:/deeplearn# 
+(py39numpy1235theano105) root@xxx:/deeplearn# ls
 MyNetwork  __pycache__      mnist.pkl.gz               mnist_expanded.pkl.gz  mnist_svm.py  network2.py  test.py
 README.md  expand_mnist.py  mnist_average_darkness.py  mnist_loader.py        network.py    network3.py
 
-(py36numpytheano) root@xxx:/deeplearn# 
-(py36numpytheano) root@xxx:/deeplearn# python --version
-Python 3.6.13 :: Anaconda, Inc.
-(py36numpytheano)
-(py36numpytheano) root@xxx:/deeplearn# exit
+(py39numpy1235theano105) root@xxx:/deeplearn# python --version
+Python 3.9.21
+(py39numpy1235theano105) root@xxx:/deeplearn#
+(py39numpy1235theano105) root@xxx:/deeplearn# exit
 exit
 
 ~/DeepLearningPython35 $
-~/DeepLearningPython35 $ docker container ls --all
+~/DeepLearningPython35 $ docker container ls --latest
 CONTAINER ID   IMAGE                              COMMAND       CREATED      ...       NAMES
-xxxxxxxxxxxx   continuumio/miniconda3:24.7.1-0    "/bin/bash"   xxx                    deeplearning
+xxxxxxxxxxxx   continuumio/miniconda3:25.1.1-2    "/bin/bash"   xxx                    deeplearning
 ```
 
 ### How to run the demo Python code in the created Docker container
@@ -243,70 +246,71 @@ in "How to clone GitHub repository into local directory".
 `cd` into the directory _DeepLearningPython35_ if not already there.
 
 You must be on the specified branch for the class
-- For the Part 1 class: _chap1_30-hidden-neurons-3.0-eta_
+- For the Part 1 class: _chap1_30-hidden-neurons-3.0-eta_ branch
 
 Verify with `git branch` (see section on "How to clone GitHub repository into local directory").  
-If not, do e.g. for Part 1 class `git checkout chap1_30-hidden-neurons-3.0-eta` to switch to that branch, then verify with `git branch`.
+If not, do
+- For the Part 1 class `git checkout chap1_30-hidden-neurons-3.0-eta` to switch to that branch, then verify with `git branch`.
 
-The commands shown in the text area below do the following listed items; the text area also shows the _Terminal_ console response to the commands:
+The commands shown in the text-block area below do the following listed items; the text-block area also shows the _Terminal_ console response to the commands:
 - First, just verify we see the newly created container named _deeplearning_
 - At _DeepLearningPython35_ directory, start `docker` container _deeplearning_ and specify option to attach an interactive shell,  
   with `docker container start -ai deeplearning`
-  - At the interactive shell command line inside the container, activate the environment we created, with `conda activate py36numpytheano`
+  - At the interactive shell command line inside the container, activate the environment we created, with `conda activate py39numpy1235theano105`
   - We can use `ls` to see the directories at the root directory;  
   then `cd` into the _deeplearn_ directory mounted into the container;
     - When we created the container, we had bind that mount to the local _DeepLearningPython35_ directory,
     which must be already on the git branch _chap1_30-hidden-neurons-3.0-eta_
   - We can see the files in our local _DeepLearningPython35_ directory, including _test.py_, with `ls`
   - We can double-check the python version, with `python --version`
-  - Now, we can run the demo code in _test.py_, with `python3.6 test.py`
-    - On my late-2013 MacBook Pro, it takes about 10s - 15s to complete first Epoch 0, about a minute to finish Epoch 5
+  - Now, we can run the demo code in _test.py_, with `python3.9 test.py`
+    - On my late-2013 MacBook Pro, it takes about 10s - 15s to complete first Epoch 0, about a minute to finish Epoch 0 to Epoch 5
     - Each epoch run uses the training images; then neural network is evaluated on the 10000 test images
-  - Use control-c to break out of the run as desired
+  - Use control-C to break out of the run as desired
   - After the run, we exit the container, with `exit`
 - Now we should be back at the Terminal console, in the _DeepLearningPython35_ directory
 ```
 ~/DeepLearningPython35 $
-~/DeepLearningPython35 $ docker container ls --all
+~/DeepLearningPython35 $ docker container ls --latest
 CONTAINER ID   IMAGE                              COMMAND       CREATED      ...       NAMES
-xxxxxxxxxxxx   continuumio/miniconda3:24.7.1-0    "/bin/bash"   xxx                    deeplearning
+xxxxxxxxxxxx   continuumio/miniconda3:25.1.1-2    "/bin/bash"   xxx                    deeplearning
 
 ~/DeepLearningPython35 $
 ~/DeepLearningPython35 $ docker container start -ai deeplearning
 
 (base) root@xxx:/#
-(base) root@xxx:/# conda activate py36numpytheano
+(base) root@xxx:/# conda activate py39numpy1235theano105
 
-(py36numpytheano) root@xxx:/#
-(py36numpytheano) root@xxx:/# ls
+(py39numpy1235theano105) root@xxx:/#
+(py39numpy1235theano105) root@xxx:/# ls
 bin  boot  deeplearn  dev  etc	home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 
-(py36numpytheano) root@xxx:/#
-(py36numpytheano) root@xxx:/# cd deeplearn/
+(py39numpy1235theano105) root@xxx:/#
+(py39numpy1235theano105) root@xxx:/# cd deeplearn/
 
-(py36numpytheano) root@xxx:/deeplearn#
-(py36numpytheano) root@xxx:/deeplearn# ls
+(py39numpy1235theano105) root@xxx:/deeplearn#
+(py39numpy1235theano105) root@xxx:/deeplearn# ls
 MyNetwork  __pycache__	    mnist.pkl.gz	       mnist_expanded.pkl.gz  mnist_svm.py  network2.py  test.py
 README.md  expand_mnist.py  mnist_average_darkness.py  mnist_loader.py	      network.py    network3.py
 
-(py36numpytheano) root@xxx:/deeplearn#
-(py36numpytheano) root@xxx:/deeplearn# python --version
-Python 3.6.13 :: Anaconda, Inc.
+(py39numpy1235theano105) root@xxx:/deeplearn#
+(py39numpy1235theano105) root@xxx:/deeplearn# python --version
+Python 3.9.21
 
-(py36numpytheano) root@xxx:/deeplearn#
-(py36numpytheano) root@xxx:/deeplearn# python3.6 test.py
-Epoch 0 : 8943 / 10000
-Epoch 1 : 9166 / 10000
-Epoch 2 : 9267 / 10000
-Epoch 3 : 9340 / 10000
-Epoch 4 : 9337 / 10000
-Epoch 5 : 9374 / 10000
-Epoch 6 : 9386 / 10000
+(py39numpy1235theano105) root@xxx:/deeplearn#
+(py39numpy1235theano105) root@xxx:/deeplearn# python3.9 test.py
+Epoch 0 : 8020 / 10000
+Epoch 1 : 8130 / 10000
+Epoch 2 : 9281 / 10000
+Epoch 3 : 9338 / 10000
+Epoch 4 : 9347 / 10000
+Epoch 5 : 9404 / 10000
+Epoch 6 : 9462 / 10000
 ...
-< Use control-c to break out of the run as desired >
+< Use control-C to break out of the run as desired >
 
-(py36numpytheano) root@xxx:/deeplearn#
-(py36numpytheano) root@xxx:/deeplearn# exit
+(py39numpy1235theano105) root@xxx:/deeplearn#
+(py39numpy1235theano105) root@xxx:/deeplearn# exit
 exit
 ~/DeepLearningPython35 $
 ```
