@@ -195,7 +195,7 @@ net.SGD(training_data, 60, mini_batch_size, 0.1, validation_data, test_data)
 '''
 
 # chapter 6 -  rectified linear units and some l2 regularization (lmbda=0.1) => even better accuracy
-'''
+#'''
 from network3 import ReLU
 net = Network([
     ConvPoolLayer(image_shape=(mini_batch_size, 1, 28, 28),
@@ -211,10 +211,10 @@ net = Network([
 # increase lambda by same factor of 10 (mini-batch-size) to maintain weight decay factor because in network3.py SGD method's cost formula we added the mini_batch_size term to correctly get 'n' in denominator
 net.SGD(training_data, 60, mini_batch_size, 0.03, validation_data, test_data, lmbda=1.0)  # accuracy close to author reported 99.23%, got 99.20% on test data set; with eta 0.035 got 99.26% on test data set
 #net.SGD(training_data, 60, mini_batch_size, 0.03, validation_data, test_data, lmbda=0.1)
-'''
+#'''
 
 # chapter 6 - add second fully-connected layer, increase to 1000 neurons, add 0.5 dropout (no L2 regularization); use expanded data set
-#"""
+"""
 expanded_training_data, _, _ = network3.load_data_shared("mnist_expanded.pkl.gz")
 
 from network3 import ReLU
@@ -235,4 +235,4 @@ net = Network([
     mini_batch_size)
 net.SGD(expanded_training_data, 40, mini_batch_size, 0.03,
         validation_data, test_data)
-#"""
+"""
