@@ -1,5 +1,5 @@
 ## Running IEEE Boston Section class demo code
-## Introduction to Neural Networks and Deep Learning (Part 1)<br>March 22, 2025
+## Introduction to Neural Networks and Deep Learning (Part 2, Section 1)<br>April 19, 2025
 Instructions are given below for each of the five steps:
 * download Git software
 * download Docker software
@@ -13,7 +13,7 @@ we decided to create a _Docker_ container and to run the demo code in it.
 In software engineering parlance, a _container_ packages up code and all its dependencies into a standard unit of software so that the application can run
 anywhere, as long as the container engine supports the underlying operating system.  
 Docker is sufficiently popular nowadays so that installing as well as running Docker on different platforms should be well supported and documented.
-Personal and most small business use is still free, though a sign-up for a Docker account may be required.
+Personal and most small business use is still free. I have been using it here without needing to sign in into a Docker account though that could change.
 
 ### How to download Git software
 Git is a very popular source code management tool for version control, widely used among software professionals.
@@ -39,10 +39,10 @@ is still running).
 ##### Public Service Announcement
 It looks like my installed Docker Desktop 4.24.2 (124339) for Mac has an issue tracked here
 [Docker does not recover from resource saver mode](https://github.com/docker/for-mac/issues/6933); see my work-around below.  
-If you are using Mac but not on macOS Monterey (version 12) or later, it seems that Docker Desktop 4.25.0+ is not available,
-so try downloading latest 4.24.x (sorry, you'd need to [google around](https://forums.docker.com/t/where-can-i-download-an-older-version-of-docker-desktop-for-mac/139977/4)
-because the direct downloads don't seem available anymore) and do my work-around below.
-Otherwise, download at least version 4.38.0, because the issue linked above had a report dated Jan 10, 2025, of seeing the problem in version 4.37.2.  
+Try to download at least version 4.38.0, because the issue linked above had a report dated Jan 10, 2025, of seeing the problem in version 4.37.2.  
+If you are using Mac but not on macOS Monterey (version 12) or later, it seems that Docker Desktop 4.25.0+ does not run on the earlier Mac,
+so try downloading 4.24.2 (sorry, you'd need to [google around](https://forums.docker.com/t/where-can-i-download-an-older-version-of-docker-desktop-for-mac/139977/4)
+because the download/install page says Docker supports current release of macOS and the previous two releases) then do my work-around below.
 I'm staying on Docker Desktop 4.24.2 since my Mac is on Big Sur (version 11); will be getting a new Mac soon :)  
  
 The workaround for me is: As soon as Docker Desktop starts, open Settings (wheel icon on top right) > left menu > Resources | Advanced
@@ -60,7 +60,8 @@ this downloads the demo source code from my repository into your local computer
 a repository can have many versions of the source code, each stored in its own branch
 - Checkout the desired branch instead of _master_ branch, with `git checkout <branchname>`; that specific branch has the desired setup of demo code you want to run  
   - For the Part 1 class: `git checkout chap1_30-hidden-neurons-3.0-eta`
-- Verify with `git branch` again that you are on the desired branch _chap1_30-hidden-neurons-3.0-eta_ which is now marked with an asterisk (*)
+  - For the Part 2 (Section 1) class: `git checkout chap6_2ConvPool-FullyConn-Softmax-ReLU-L2`
+- Verify with `git branch` again that you are on the desired branch e.g. _chap6_2ConvPool-FullyConn-Softmax-ReLU-L2_ which is now marked with an asterisk (*)
 - Use `ls -l` to see the files in the directory
 ```
 ~ $
@@ -70,25 +71,25 @@ a repository can have many versions of the source code, each stored in its own b
 
 ~/DeepLearningPython35 $ git branch
   chap1_30-hidden-neurons-3.0-eta
+  chap6_2ConvPool-FullyConn-Softmax-ReLU-L2
 * master
 
-~/DeepLearningPython35 $ git checkout chap1_30-hidden-neurons-3.0-eta
+~/DeepLearningPython35 $ git checkout chap6_2ConvPool-FullyConn-Softmax-ReLU-L2
 
 ~/DeepLearningPython35 $ git branch
-* chap1_30-hidden-neurons-3.0-eta
+  chap1_30-hidden-neurons-3.0-eta
+* chap6_2ConvPool-FullyConn-Softmax-ReLU-L2
   master
 
 ~/DeepLearningPython35 $ ls -l
-total 158088
+total 158392
 -rw-r--r--   1 clkim  staff    492526 Feb 29  2020 MyNetwork
--rw-r--r--   1 clkim  staff     14338 Mar 10 17:04 README.md
+-rw-r--r--   1 clkim  staff       619 Mar 30 12:41 README.md
 ...
 ...
--rw-r--r--   1 clkim  staff       770 Feb 29  2020 mnist_svm.py
--rw-r--r--   1 clkim  staff      6398 Mar 11  2021 network.py
 -rw-r--r--   1 clkim  staff     15252 Feb 29  2020 network2.py
--rw-r--r--@  1 clkim  staff     13000 Feb 29  2020 network3.py
--rw-r--r--   1 clkim  staff      7394 Mar  8 23:34 test.py
+-rw-r--r--   1 clkim  staff     13642 Mar 30 12:41 network3.py
+-rw-r--r--   1 clkim  staff      8808 Mar 30 12:41 test.py
 ~/DeepLearningPython35 $
 ```
 (Skip until class) To run the desired setup of demo code, "uncomment in" or "comment out" as appropriate the code in _test.py_ in order to specify
@@ -96,10 +97,12 @@ the neural network and deep learning configuration to run.
 
 (Skip until class) To see an example of the flexible but somewhat hackish and minimalist changes I made in _test.py_ in order to run the desired demo:  
 (Note: red is for text deleted, green is for text added; hit space bar once to scroll down one page;
-when you see `(END)` of document, enter _q_ to quit and get back to the command line prompt.)
+when you see `(END)` of document, enter _q_ to quit and get back to the command line prompt.)  
+In the respective branch below
 - For the Part 1 class: in the _chap1_30-hidden-neurons-3.0-eta_ branch, at command line run  
 `git diff ea229ac 6ba2425`  
-to see the small changes to the _test.py_ file in that branch
+- For the Part 2 (Section 1) class: in the _chap6_2ConvPool-FullyConn-Softmax-ReLU-L2_ branch, at command line run  
+`git diff fe4ced0 025d21b`
 
 Acknowledgement: The repository is forked from the _DeepLearningPython35_ repository of _Michal Daniel Dobrzanski_ who ported the book's code from
 Python 2.7 to Python 3.5 and wrote the "orchestrator" testing file _test.py_.
@@ -247,10 +250,14 @@ in "How to clone GitHub repository into local directory".
 
 You must be on the specified branch for the class
 - For the Part 1 class: _chap1_30-hidden-neurons-3.0-eta_ branch
+- For the Part 2 (Secion 1) class: _chap6_2ConvPool-FullyConn-Softmax-ReLU-L2_ branch
 
 Verify with `git branch` (see section on "How to clone GitHub repository into local directory").  
 If not, do
-- For the Part 1 class `git checkout chap1_30-hidden-neurons-3.0-eta` to switch to that branch, then verify with `git branch`.
+- For the Part 1 class `git checkout chap1_30-hidden-neurons-3.0-eta` to switch to that branch.
+- For the Part 2 (Section 1) class `git checkout chap6_2ConvPool-FullyConn-Softmax-ReLU-L2` to switch to that branch.
+
+Then verify with `git branch`.
 
 The commands shown in the text-block area below do the following listed items; the text-block area also shows the _Terminal_ console response to the commands:
 - First, just verify we see the newly created container named _deeplearning_
@@ -260,12 +267,14 @@ The commands shown in the text-block area below do the following listed items; t
   - We can use `ls` to see the directories at the root directory;  
   then `cd` into the _deeplearn_ directory mounted into the container;
     - When we created the container, we had bind that mount to the local _DeepLearningPython35_ directory,
-    which must be already on the git branch _chap1_30-hidden-neurons-3.0-eta_
+    which must be already on the desired git branch, either for Part 1 class _chap1_30-hidden-neurons-3.0-eta_, or for Part 2 Section 1 class _chap6_2ConvPool-FullyConn-Softmax-ReLU-L2_
   - We can see the files in our local _DeepLearningPython35_ directory, including _test.py_, with `ls`
   - We can double-check the python version, with `python --version`
   - Now, we can run the demo code in _test.py_, with `python3.9 test.py`
-    - On my late-2013 MacBook Pro, it takes about 10s - 15s to complete first Epoch 0, about a minute to finish Epoch 0 to Epoch 5
-    - Each epoch run uses the training images; then neural network is evaluated on the 10000 test images
+    - On my late-2013 MacBook Pro:
+      - Part 1 class: it takes about 10s - 15s to complete first Epoch 0, about a minute to finish six Epoch 0 to Epoch 5
+      - Part 2 (Section 1) class: it takes about 30 - 35s to complete each Epoch 
+    - Each epoch run uses the 50000 training images; then neural network is evaluated on the 10000 test images
   - Use control-C to break out of the run as desired
   - After the run, we exit the container, with `exit`
 - Now we should be back at the Terminal console, in the _DeepLearningPython35_ directory
@@ -299,6 +308,8 @@ Python 3.9.21
 
 (py39numpy1235theano105) root@xxx:/deeplearn#
 (py39numpy1235theano105) root@xxx:/deeplearn# python3.9 test.py
+
+<example output for Part 1 class>
 Epoch 0 : 8020 / 10000
 Epoch 1 : 8130 / 10000
 Epoch 2 : 9281 / 10000
@@ -307,6 +318,29 @@ Epoch 4 : 9347 / 10000
 Epoch 5 : 9404 / 10000
 Epoch 6 : 9462 / 10000
 ...
+
+<example output for Part 2 (Section 1) class; my Mac does not have GPUs so code in my network3.py is to use CPU>
+...... UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.5
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+Running with a CPU.  If this is not desired, then the modify network3.py to set
+the GPU flag to True.
+Training mini-batch number 0
+Training mini-batch number 1000
+Training mini-batch number 2000
+Training mini-batch number 3000
+Training mini-batch number 4000
+Epoch 0: validation accuracy 97.17%
+This is the best validation accuracy to date.
+The corresponding test accuracy is 96.65%
+Training mini-batch number 5000
+Training mini-batch number 6000
+Training mini-batch number 7000
+Training mini-batch number 8000
+Training mini-batch number 9000
+Epoch 1: validation accuracy 98.10%
+This is the best validation accuracy to date.
+The corresponding test accuracy is 97.80%
+
 < Use control-C to break out of the run as desired >
 
 (py39numpy1235theano105) root@xxx:/deeplearn#
@@ -314,7 +348,7 @@ Epoch 6 : 9462 / 10000
 exit
 ~/DeepLearningPython35 $
 ```
-## End of Running IEEE Boston Section class demo code: Introduction to Neural Networks and Deep Learning (Part 1)
+## End of Running IEEE Boston Section class demo code: Introduction to Neural Networks and Deep Learning (Part 1/Part 2)
 ___
 
 ## Overview
